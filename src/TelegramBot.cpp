@@ -26,7 +26,7 @@ void TelegramBot::Setup(const std::string &token, const std::string &path)
     curl::Response response = session.DoRequest(requestParams);
     
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
-    std::string botName = json["result"]["username"].asString();
+    std::string botName = (*json)["result"]["username"].asString();
     
     Logger::debug << "botName: " << botName << std::endl;
     
@@ -71,7 +71,7 @@ void TelegramBot::GetUpdates()
     }
     
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
-    std::vector<Update> updates = Converter::FromJSON<std::vector<Update>>(json["result"]);
+    std::vector<Update> updates = Converter::FromJSON<std::vector<Update>>((*json)["result"]);
     
     for(auto &u : updates) {
         User user;
@@ -177,19 +177,19 @@ void TelegramBot::Start(bool inBackground)
 bool TelegramBot::CheckResponse(curl::Response &response, const std::string &methodName)
 {
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
-    /*if (json == nullptr) {
+    if (json == nullptr) {
         std::string error = "Response body is no valid JSON";
         if(methodName != "") {
             error += ". " + methodName + " failed";
         }
         throw TelegramException(error, response);
     }
-    */
-    bool ok = json["ok"].asBool();
+    
+    bool ok = (*json)["ok"].asBool();
     if(ok) {
         
     } else {
-        std::string description = json["description"].asString();
+        std::string description = (*json)["description"].asString();
         if(methodName != "") {
             Logger::warn << "Call to " << methodName << " failed" << std::endl;
         } else {
