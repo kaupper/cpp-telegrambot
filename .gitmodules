@@ -3,4 +3,4 @@
 	url = https://github.com/kaupper/cpp-curlsession
 [submodule "cpp-jsonserializer"]
 	path = cpp-jsonserializer
-	url = https://github.com/kaupper/cpp-jsonserializer
+	url = ./cpp-curlsession/cpp-jsonserializer/
