@@ -10,16 +10,16 @@ bool UpdateQueue::Available(std::string senderId)
     return availables > 0; 
 }
 
-structures::Update UpdateQueue::Pop(std::string senderId)
+jsonserializer::structures::Update UpdateQueue::Pop(std::string senderId)
 {
     queueMutex.lock();
-    structures::Update update = queue[senderId].back();
+    jsonserializer::structures::Update update = queue[senderId].back();
     queue[senderId].pop_back();
     queueMutex.unlock();
     return update;
 }
 
-void UpdateQueue::Push(std::string senderId, structures::Update &update)
+void UpdateQueue::Push(std::string senderId, jsonserializer::structures::Update &update)
 {
     queueMutex.lock();
     queue[senderId].push_back(update);

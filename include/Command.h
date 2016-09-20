@@ -1,8 +1,10 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
+#include "generated.h"
+
 #include "CommandException.h"
-#include "structures/StructConverter.h"
+#include "include/StructConverter.h"
 
 namespace telegram
 {
@@ -46,13 +48,13 @@ namespace telegram
         void SetName(std::string n) { name = n; } 
         const std::string & GetName() const { return name; }
         
-        bool operator()(structures::Update &, CallReason, CallType);
+        bool operator()(jsonserializer::structures::Update &, CallReason, CallType);
         
         virtual void Setup() { }
         
-        virtual bool OnDirect(structures::Update &) { throw CommandException("Method OnDirect is not implemented!"); }
-        virtual bool OnIndirect(structures::Update &) { throw CommandException("Method OnIndirect is not implemented!"); }
-        virtual bool OnQuit(structures::Update &) { throw CommandException("Method OnQuit is not implemented!"); }
+        virtual bool OnDirect(jsonserializer::structures::Update &) { throw CommandException("Method OnDirect is not implemented!"); }
+        virtual bool OnIndirect(jsonserializer::structures::Update &) { throw CommandException("Method OnIndirect is not implemented!"); }
+        virtual bool OnQuit(jsonserializer::structures::Update &) { throw CommandException("Method OnQuit is not implemented!"); }
     };
 }
 

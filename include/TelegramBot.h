@@ -5,14 +5,15 @@
 #include <map>
 #include <vector>
 
+#include "include/StructConverter.h"
+#include "include/CurlSession.h"
+#include "include/PersistingService.h"
+
+#include "TelegramException.h"
+#include "Logger.h"
+#include "Storage.h"
 #include "UpdateQueue.h"
 #include "CommandSet.h"
-#include "structures/StructConverter.h"
-#include "TelegramException.h"
-#include "utils/Logger.h"
-#include "utils/Storage.h"
-#include "utils/curl/CurlSession.h"
-#include "utils/json/PersistingService.h"
 
 namespace telegram
 {
@@ -28,7 +29,12 @@ namespace telegram
         class SendMessageParams;
     }
     
-    class TelegramBot : public PersistingService
+     template <typename T> const bool isMarkup = std::is_same<T, jsonserializer::structures::InlineKeyboardMarkup>::value ||
+                                                std::is_same<T, jsonserializer::structures::ReplyKeyboardMarkup>::value ||
+                                                std::is_same<T, jsonserializer::structures::ReplyKeyboardHide>::value ||
+                                                std::is_same<T, jsonserializer::structures::ForceReply>::value;
+    
+    class TelegramBot : public jsonserializer::PersistingService
     {
     private:
         template <typename T>

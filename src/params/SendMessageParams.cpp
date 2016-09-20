@@ -1,8 +1,8 @@
-#include "SendMessageParams.h"
+#include "params/SendMessageParams.h"
 
 using namespace telegram::params;
 
-SendMessageParams::SendMessageParams(telegram::structures::Chat chat, std::string text) : Serializable() 
+SendMessageParams::SendMessageParams(jsonserializer::structures::Chat chat, std::string text) : jsonserializer::Serializable() 
 {   
     (*this)["chat_id"] = std::to_string(chat.GetIdValue());
     (*this)["text"] = text;

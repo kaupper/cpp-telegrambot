@@ -14,7 +14,7 @@ namespace telegram
         Command *lastCommand;
         std::vector<Command *> commands;
         
-        CallReason GetReason(const structures::Update &) const;
+        CallReason GetReason(const jsonserializer::structures::Update &) const;
         
     protected:
         TelegramBot &bot;
@@ -34,7 +34,7 @@ namespace telegram
         
         virtual void Setup() { }
         
-        bool Process(structures::Update &update);
+        bool Process(jsonserializer::structures::Update &update);
         void ResetLastCommand() { lastCommand = nullptr; }
     };
 }

@@ -3,7 +3,7 @@
 
 using namespace telegram;
 using namespace telegram::params;
-using namespace telegram::structures;
+using namespace jsonserializer::structures;
 
 void TelegramBot::Setup(const std::string &token, const std::string &path)
 {   
@@ -26,7 +26,7 @@ void TelegramBot::Setup(const std::string &token, const std::string &path)
     curl::Response response = session.DoRequest(requestParams);
     
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
-    std::string botName = (*json)["result"]["username"].asString();
+    std::string botName = json["result"]["username"].asString();
     
     Logger::debug << "botName: " << botName << std::endl;
     
@@ -36,14 +36,14 @@ void TelegramBot::Setup(const std::string &token, const std::string &path)
     try {
         PersistingService::Load();
         Logger::info << "Loaded data file for bot \"" << botName << "\"" << std::endl;
-    } catch (const PersistingException &loadEx) {
+    } catch (const jsonserializer::SerializableException &loadEx) {
         Logger::warn << "Failed to load data file for bot \"" << botName << "\"" << std::endl;
         Logger::warn << "Reason: " << loadEx.what() << std::endl;
         
         try {
             PersistingService::Save();
             Logger::info << "Created new data file" << std::endl;
-        } catch (const PersistingException &saveEx) {
+        } catch (const jsonserializer::SerializableException &saveEx) {
             std::string error = "Failed to create new data file\n";
             error += std::string("Reason: ") + saveEx.what();
             throw TelegramException(error);
@@ -71,7 +71,7 @@ void TelegramBot::GetUpdates()
     }
     
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
-    std::vector<Update> updates = Converter::FromJSON<std::vector<Update>>((*json)["result"]);
+    std::vector<Update> updates = Converter::FromJSON<std::vector<Update>>(json["result"]);
     
     for(auto &u : updates) {
         User user;
@@ -185,11 +185,11 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
         throw TelegramException(error, response);
     }
     
-    bool ok = (*json)["ok"].asBool();
+    bool ok = json["ok"].asBool();
     if(ok) {
         
     } else {
-        std::string description = (*json)["description"].asString();
+        std::string description = json["description"].asString();
         if(methodName != "") {
             Logger::warn << "Call to " << methodName << " failed" << std::endl;
         } else {
