@@ -12,13 +12,13 @@ namespace telegram
     class UpdateQueue
     {
     private:
-        std::map<std::string, std::vector<jsonserializer::structures::Update>> queue;
+        std::map<std::string, std::vector<telegram::structures::Update>> queue;
         std::mutex queueMutex;
         
     public:
         bool Available(std::string senderId);
-        jsonserializer::structures::Update Pop(std::string senderId);
-        void Push(std::string senderId, jsonserializer::structures::Update &update);
+        telegram::structures::Update Pop(std::string senderId);
+        void Push(std::string senderId, telegram::structures::Update &update);
     };
 }
 

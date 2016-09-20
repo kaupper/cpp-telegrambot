@@ -5,6 +5,7 @@ set(JSON_SERIALIZER_NAME telegram-jsonserializer)
 set(JSON_FILE ${PROJECT_SOURCE_DIR}/DataStructureDefinitions.json)
 set(GENERATED_DIRECTORY ${PROJECT_SOURCE_DIR}/generated)
 set(GENERATED_HEADER ${PROJECT_SOURCE_DIR}/generated.h)
+set(GENERATED_NAMESPACE "telegram::structures")
 add_subdirectory(cpp-jsonserializer)
 
 add_subdirectory(cpp-curlsession)

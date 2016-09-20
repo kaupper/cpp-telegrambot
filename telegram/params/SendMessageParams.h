@@ -11,7 +11,7 @@ namespace telegram::params
     class SendMessageParams : public jsonserializer::Serializable
     {
     public:
-        SendMessageParams(jsonserializer::structures::Chat chat, std::string text);
+        SendMessageParams(telegram::structures::Chat chat, std::string text);
         
         SendMessageParams & SetParseMode(telegram::ParseMode mode);
         SendMessageParams & SetDisableWebPagePreview(bool disable);

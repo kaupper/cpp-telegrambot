@@ -3,7 +3,7 @@
 
 using namespace telegram;
 
-bool Command::operator()(jsonserializer::structures::Update &update, CallReason reason, CallType type)
+bool Command::operator()(telegram::structures::Update &update, CallReason reason, CallType type)
 {
     if(reason == CallReason::MESSAGE) {
         switch(type) {

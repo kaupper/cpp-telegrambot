@@ -3,6 +3,7 @@
 
 using namespace telegram;
 using namespace telegram::params;
+using namespace telegram::structures;
 using namespace jsonserializer::structures;
 
 void TelegramBot::Setup(const std::string &token, const std::string &path)

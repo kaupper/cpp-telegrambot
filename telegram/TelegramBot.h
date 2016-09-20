@@ -29,10 +29,10 @@ namespace telegram
         class SendMessageParams;
     }
     
-     template <typename T> const bool isMarkup = std::is_same<T, jsonserializer::structures::InlineKeyboardMarkup>::value ||
-                                                std::is_same<T, jsonserializer::structures::ReplyKeyboardMarkup>::value ||
-                                                std::is_same<T, jsonserializer::structures::ReplyKeyboardHide>::value ||
-                                                std::is_same<T, jsonserializer::structures::ForceReply>::value;
+     template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||
+                                                std::is_same<T, telegram::structures::ReplyKeyboardMarkup>::value ||
+                                                std::is_same<T, telegram::structures::ReplyKeyboardHide>::value ||
+                                                std::is_same<T, telegram::structures::ForceReply>::value;
     
     class TelegramBot : public jsonserializer::PersistingService
     {

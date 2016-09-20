@@ -3,7 +3,7 @@
 
 using namespace telegram;
 
-CallReason CommandSet::GetReason(const jsonserializer::structures::Update & update) const
+CallReason CommandSet::GetReason(const telegram::structures::Update & update) const
 {
     CallReason reason = CallReason::NOTHING;
     if(update.message != nullptr) {
@@ -27,7 +27,7 @@ CommandSet::~CommandSet()
     }
 }
 
-bool CommandSet::Process(jsonserializer::structures::Update &update)
+bool CommandSet::Process(telegram::structures::Update &update)
 {
     CallReason reason = GetReason(update);
     std::string cmd = *(update.GetMessage()->GetText());
