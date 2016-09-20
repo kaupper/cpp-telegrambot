@@ -2,7 +2,6 @@
 #define TEST_COMMAND_SET_H_
 
 #include "telegram/CommandSet.h"
-#include "TestCommand.h"
 #include "PingCommand.h"
 #include "HideCommand.h"
 #include "ExitCommand.h"
@@ -14,7 +13,6 @@ public:
         RegisterCommand<PingCommand>(bot, "/ping");
         RegisterCommand<ExitCommand>(bot, "/exit");
         RegisterCommand<HideCommand>(bot, "/hide");
-        RegisterCommand<TestCommand>(bot, "/test");
     }
 };
 

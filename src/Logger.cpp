@@ -1,5 +1,7 @@
 #include "Logger.h"
 
+using namespace telegram;
+
 Logger Logger::error;
 Logger Logger::warn;
 Logger Logger::info;

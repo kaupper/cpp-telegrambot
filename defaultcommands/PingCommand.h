@@ -9,7 +9,7 @@ class PingCommand : public telegram::Command
 public:
     PingCommand(telegram::TelegramBot &bot, std::string name, telegram::CommandSet *cs) : telegram::Command(bot, name, cs) { }
     
-    virtual bool OnDirect(telegram::structures::Update &update)
+    virtual bool OnDirect(jsonserializer::structures::Update &update)
     {
         bot.SendMessage({update.GetMessage()->GetChatValue(), "pong"});
         return false;

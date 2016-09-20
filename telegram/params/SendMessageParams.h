@@ -4,7 +4,7 @@
 #include "jsonserializer/Serializable.h"
 #include "jsonserializer/StructConverter.h"
 
-#include "TelegramBot.h"
+#include "telegram/TelegramBot.h"
 
 namespace telegram::params
 {

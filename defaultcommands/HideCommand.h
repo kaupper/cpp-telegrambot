@@ -9,10 +9,10 @@ class HideCommand : public telegram::Command
 public:
     HideCommand(telegram::TelegramBot &bot, std::string name, telegram::CommandSet *cs) : telegram::Command(bot, name, cs) { }
     
-    virtual bool OnDirect(telegram::structures::Update &update)
+    virtual bool OnDirect(jsonserializer::structures::Update &update)
     {
         telegram::params::SendMessageParams params(update.message->GetChatValue(), "Hide the keyboard");
-        params.SetReplyMarkup(telegram::structures::ReplyKeyboardHide(true));
+        params.SetReplyMarkup(jsonserializer::structures::ReplyKeyboardHide(true));
         bot.SendMessage(params);
         return false;
     }

@@ -177,14 +177,14 @@ void TelegramBot::Start(bool inBackground)
 bool TelegramBot::CheckResponse(curl::Response &response, const std::string &methodName)
 {
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
-    if (json == nullptr) {
+    /*if (json == nullptr) {
         std::string error = "Response body is no valid JSON";
         if(methodName != "") {
             error += ". " + methodName + " failed";
         }
         throw TelegramException(error, response);
     }
-    
+    */
     bool ok = json["ok"].asBool();
     if(ok) {
         
