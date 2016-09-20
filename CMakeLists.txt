@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project (telegrambot)
  
+set(JSON_SERIALIZER_NAME telegram-jsonserializer)
 set(JSON_FILE ${PROJECT_SOURCE_DIR}/DataStructureDefinitions.json)
 set(GENERATED_DIRECTORY ${PROJECT_SOURCE_DIR}/generated)
 set(GENERATED_HEADER ${PROJECT_SOURCE_DIR}/generated.h)
@@ -19,4 +20,4 @@ ${PROJECT_SOURCE_DIR}/src/UpdateQueue.cpp
 include_directories(${PROJECT_SOURCE_DIR}/telegram ${PROJECT_SOURCE_DIR})
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
-target_link_libraries(${PROJECT_NAME} LINK_PUBLIC "curlsession" "jsonserializer" "pthread")
+target_link_libraries(${PROJECT_NAME} LINK_PUBLIC "curlsession" ${JSON_SERIALIZER_NAME} "pthread")
