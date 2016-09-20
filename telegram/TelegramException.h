@@ -5,7 +5,7 @@
 #include <exception>
 #include <stdexcept>
 
-#include "include/CurlSession.h"
+#include "curlsession/CurlSession.h"
 
 namespace telegram
 {

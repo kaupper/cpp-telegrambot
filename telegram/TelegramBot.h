@@ -5,9 +5,9 @@
 #include <map>
 #include <vector>
 
-#include "include/StructConverter.h"
-#include "include/CurlSession.h"
-#include "include/PersistingService.h"
+#include "jsonserializer/StructConverter.h"
+#include "jsonserializer/PersistingService.h"
+#include "curlsession/CurlSession.h"
 
 #include "TelegramException.h"
 #include "Logger.h"

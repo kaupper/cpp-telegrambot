@@ -1,9 +1,10 @@
 #ifndef SEND_MESSAGE_PARAMS_H_
 #define SEND_MESSAGE_PARAMS_H_
 
-#include "include/Serializable.h"
+#include "jsonserializer/Serializable.h"
+#include "jsonserializer/StructConverter.h"
+
 #include "TelegramBot.h"
-#include "include/StructConverter.h"
 
 namespace telegram::params
 {

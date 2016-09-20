@@ -1,10 +1,10 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
+#include "jsonserializer/StructConverter.h"
 #include "generated.h"
 
 #include "CommandException.h"
-#include "include/StructConverter.h"
 
 namespace telegram
 {

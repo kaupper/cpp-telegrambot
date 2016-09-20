@@ -16,7 +16,7 @@ ${PROJECT_SOURCE_DIR}/src/TelegramBot.cpp
 ${PROJECT_SOURCE_DIR}/src/UpdateQueue.cpp
 )
 
-include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/telegram ${PROJECT_SOURCE_DIR})
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 target_link_libraries(${PROJECT_NAME} LINK_PUBLIC "curlsession" "jsonserializer" "pthread")
