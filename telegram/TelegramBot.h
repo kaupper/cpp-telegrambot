@@ -14,6 +14,7 @@
 #include "Storage.h"
 #include "UpdateQueue.h"
 #include "CommandSet.h"
+#include "GeneralCallback.h"
 
 namespace telegram
 {
@@ -29,7 +30,7 @@ namespace telegram
         class SendMessageParams;
     }
     
-     template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||
+    template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||
                                                 std::is_same<T, telegram::structures::ReplyKeyboardMarkup>::value ||
                                                 std::is_same<T, telegram::structures::ReplyKeyboardHide>::value ||
                                                 std::is_same<T, telegram::structures::ForceReply>::value;
@@ -52,6 +53,7 @@ namespace telegram
         
         CommandSet defaultCommandSet;
         std::vector<CommandSet *> commandSets;
+        std::vector<GeneralCallback *> generalCallbacks;
         
         std::string GetApiUrl(const std::string &method) { return "https://api.telegram.org/bot" + (*this)["token"].asString() + "/" + method ; }
         std::map<std::string, std::string> &GetDefaultHeader() { static std::map<std::string, std::string> defaultHeader = {{"Content-Type", "application/json"}}; return defaultHeader; }
@@ -105,6 +107,13 @@ namespace telegram
         T &RegisterCommand(std::string name) 
         {            
             return defaultCommandSet.RegisterCommand<T>(*this, name);
+        }
+        
+        template <typename T, typename = typename std::enable_if<std::is_base_of<GeneralCallback, T>::value>::type> 
+        T &RegisterGeneralCallback() 
+        {            
+            generalCallbacks.push_back(new T(*this));
+            return (T &) *(generalCallbacks.back());
         }
         
         void SendMessage(params::SendMessageParams &params);

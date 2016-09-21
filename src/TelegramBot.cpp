@@ -106,7 +106,7 @@ void TelegramBot::Process(TelegramBot *bot, std::string senderId)
 {
     while((*bot)["running"].asBool()) {
         if(!bot->queue.Available(senderId)) {
-            std::this_thread::sleep_for(std::chrono::seconds(2));
+            std::this_thread::yield();
             continue;
         }
         auto update = bot->queue.Pop(senderId);
@@ -116,6 +116,10 @@ void TelegramBot::Process(TelegramBot *bot, std::string senderId)
         // indicates if the current update has already been
         // successfully processed by a command set
         bool found = false;
+        
+        for(auto &gc : bot->generalCallbacks) {
+            gc->Call(update);
+        }
         
         if(bot->defaultCommandSet.Process(update)) {
             Logger::debug << "found match in default commandset" << std::endl;
@@ -149,6 +153,11 @@ TelegramBot::~TelegramBot()
     for(unsigned int i = 0; i < commandSets.size(); i++) {
         delete commandSets[i];
     }
+    
+    for(auto &e : generalCallbacks) {
+        delete e;
+    }
+    
     for(auto &e : dataStore) {
         delete e.second;
     }
@@ -166,12 +175,12 @@ void TelegramBot::Start(bool inBackground)
     }
     
     Logger::info << "Bot started" << std::endl;
-    
     (*this)["running"] = true;
     
+    auto delay = std::chrono::milliseconds(500);
     while ((*this)["running"].asBool()) {
         GetUpdates();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(delay);
     }
 }
 
