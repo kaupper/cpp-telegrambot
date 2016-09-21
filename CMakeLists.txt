@@ -16,6 +16,7 @@ ${PROJECT_SOURCE_DIR}/src/Command.cpp
 ${PROJECT_SOURCE_DIR}/src/CommandSet.cpp
 ${PROJECT_SOURCE_DIR}/src/Logger.cpp
 ${PROJECT_SOURCE_DIR}/src/TelegramBot.cpp
+${PROJECT_SOURCE_DIR}/src/TelegramBotMethods.cpp
 ${PROJECT_SOURCE_DIR}/src/UpdateQueue.cpp
 )
 

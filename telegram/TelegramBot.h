@@ -28,6 +28,7 @@ namespace telegram
     namespace params
     {
         class SendMessageParams;
+        class ForwardMessageParams;
     }
     
     template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||

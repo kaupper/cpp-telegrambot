@@ -210,18 +210,3 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
     
     return ok;
 }
-
-void TelegramBot::SendMessage(params::SendMessageParams &params)
-{
-    curl::RequestParams requestParams(GetApiUrl("sendMessage"), curl::Method::POST);
-    requestParams.SetParams(params);
-    requestParams.SetHeaders(GetDefaultHeader());
-    curl::Response response = session.DoRequest(requestParams);
-    
-    CheckResponse(response, "SendMessage"); 
-}
-
-void TelegramBot::SendMessage(params::SendMessageParams &&params)
-{
-    SendMessage(params);
-}
