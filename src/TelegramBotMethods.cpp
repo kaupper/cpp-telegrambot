@@ -6,18 +6,20 @@ using namespace jsonserializer::structures;
 structures::Message TelegramBot::SendMessage(params::SendMessageParams &params)
 {
     curl::RequestParams requestParams(GetApiUrl("sendMessage"), curl::Method::POST);
-    requestParams.SetParams(params);
+    requestParams.SetParams((jsonserializer::Serializable &) params);
     requestParams.SetHeaders(GetDefaultHeader());
     curl::Response response = session.DoRequest(requestParams);
     
-    CheckResponse(response, "SendMessage"); 
+    if(!CheckResponse(response, "SendMessage")) {
+        throw TelegramException("Call to SendMessage failed!", response);
+    }
     
-    auto responseJSON = Serializable::Deserialize(std::string(response.begin(), response.end()));
+    auto responseJSON = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
     if(responseJSON == nullptr) {
         throw TelegramException("Failed to deserialize SendMessage response!", response);
     }
     
-    return Converter::FromJSON<structures::Message>(*responseJSON);
+    return Converter::FromJSON<structures::Message>((*responseJSON)["result"]);
 }
 
 structures::Message TelegramBot::SendMessage(params::SendMessageParams &&params)

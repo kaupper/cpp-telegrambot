@@ -7,7 +7,7 @@ namespace telegram
 {
     class GeneralCallback
     {
-    private:
+    protected:
         TelegramBot &bot;
         
     public:
