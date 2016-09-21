@@ -117,11 +117,16 @@ namespace telegram
             return (T &) *(generalCallbacks.back());
         }
         
-        void SendMessage(params::SendMessageParams &params);
-        void SendMessage(params::SendMessageParams &&params);
-        
         void Start(bool inBackground = false);
         void Wait() { daemon.join(); }
+        
+        
+        // Bot API methods
+        
+        telegram::structures::Message SendMessage(params::SendMessageParams &params);
+        telegram::structures::Message SendMessage(params::SendMessageParams &&params);
+        
+        // TODO: add others
     };
 }
 
