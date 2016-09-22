@@ -2,9 +2,8 @@
 
 using namespace telegram::params;
 
-SendMessageParams::SendMessageParams(const telegram::structures::Chat &chat, std::string text) : jsonserializer::Serializable() 
+SendMessageParams::SendMessageParams(const telegram::structures::Chat &chat, std::string text) : SendParams(chat)
 {   
-    (*this)["chat_id"] = std::to_string(chat.GetIdValue());
     (*this)["text"] = text;
 }
 
@@ -28,17 +27,5 @@ SendMessageParams & SendMessageParams::SetParseMode(telegram::ParseMode mode)
 SendMessageParams & SendMessageParams::SetDisableWebPagePreview(bool disable)
 {
     (*this)["disable_web_page_preview"] = (disable ? "true" : "false");
-    return *this;
-}
-
-SendMessageParams & SendMessageParams::SetDisableNotification(bool disable)
-{
-    (*this)["disable_notification"] = (disable ? "true" : "false");
-    return *this;
-}
-
-SendMessageParams & SendMessageParams::SetReplyToMessageId(int reply)
-{
-    (*this)["reply_to_message_id"] = reply;
     return *this;
 }

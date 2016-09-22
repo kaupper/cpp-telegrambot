@@ -4,6 +4,7 @@
 #include <thread>
 #include <map>
 #include <vector>
+#include <sys/stat.h>
 
 #include "jsonserializer/StructConverter.h"
 #include "jsonserializer/PersistingService.h"
@@ -27,9 +28,29 @@ namespace telegram
     
     namespace params
     {
+        class SendFileParams;
         class SendMessageParams;
         class ForwardMessageParams;
         class SendPhotoParams;
+        class SendAudioParams;
+        class SendDocumentParams;
+        class SendStickerParams;
+        class SendVideoParams;
+        class SendVoiceParams;
+        class SendLocationParams;
+        class SendVenueParams;
+        class SendContactParams;
+        class SendChatActionParams;
+        class GetUserProfilePhotosParams;
+        class GetFileParams;
+        class KickChatMemberParams;
+        class LeaveChatParams;
+        class UnbanChatMemberParams;
+        class GetChatParams;
+        class GetChatAdministratorsParams;
+        class GetChatMembersCountParams;
+        class GetChatMemberParams;
+        class AnswerCallbackQueryParams;
     }
     
     template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||
@@ -61,7 +82,7 @@ namespace telegram
         static const std::map<std::string, std::string> defaultHeader;
         std::map<std::string, std::string> GetDefaultHeader() { return defaultHeader; }
         
-        void Setup(const std::string &token, const std::string &path);
+        void Setup(std::string token, std::string configPath, std::string filePath);
         void GetUpdates();
 
         bool CheckResponse(curl::Response &response, const std::string &methodName);
@@ -89,8 +110,8 @@ namespace telegram
         }  
         
         // public constructor used by users
-        TelegramBot(std::string token, std::string path = "./") : PersistingService(),
-            defaultCommandSet(*this) { Setup(token, path); }
+        TelegramBot(const std::string &token, const std::string &configPath = "./", const std::string &filePath = "./") : PersistingService(),
+            defaultCommandSet(*this) { Setup(token, configPath, filePath); }
             
         
         virtual ~TelegramBot();
@@ -123,17 +144,43 @@ namespace telegram
         void Wait() { daemon.join(); }
         
         
-        // Bot API methods
         
+        void DownloadFile(telegram::structures::File);
+        
+        // Bot API methods
         telegram::structures::Message SendMessage(const params::SendMessageParams &params);
         telegram::structures::Message ForwardMessage(const params::ForwardMessageParams &params);
         telegram::structures::Message SendPhoto(const params::SendPhotoParams &params);
-        
-        // TODO: add others
+        telegram::structures::Message SendAudio(const params::SendAudioParams &params);
+        telegram::structures::Message SendDocument(const params::SendDocumentParams &params);
+        telegram::structures::Message SendSticker(const params::SendStickerParams &params);
+        telegram::structures::Message SendVideo(const params::SendVideoParams &params);
+        telegram::structures::Message SendVoice(const params::SendVoiceParams &params);
+        telegram::structures::Message SendLocation(const params::SendLocationParams &params);
+        telegram::structures::Message SendVenue(const params::SendVenueParams &params);
+        telegram::structures::Message SendContact(const params::SendContactParams &params);
+        bool SendChatAction(const params::SendChatActionParams &params);
+        telegram::structures::UserProfilePhotos GetUserProfilePhotos(const params::GetUserProfilePhotosParams &params);
+        telegram::structures::File GetFile(const params::GetFileParams &params);
+        bool KickChatMember(const params::KickChatMemberParams &params);
+        bool LeaveChat(const params::LeaveChatParams &params);
+        bool UnbanChatMember(const params::UnbanChatMemberParams &params);
+        telegram::structures::Chat GetChat(const params::GetChatParams &params);
+        std::vector<telegram::structures::ChatMember> GetChatAdministrators(const params::GetChatAdministratorsParams &params);
+        int GetChatMembersCount(const params::GetChatMembersCountParams &params);
+        telegram::structures::ChatMember GetChatMember(const params::GetChatMemberParams &params);
+        bool AnswerCallbackQuery(const params::AnswerCallbackQueryParams &params);
         
     private:
-        curl::Response DoMethod(const jsonserializer::Serializable &json, const std::string &method);
-        curl::Response DoMethod(const jsonserializer::Serializable &json, const std::string &method, bool multipart, const std::string &fileKey = "");
+        // utility methods
+        curl::Response DoMethod(const jsonserializer::Serializable &json, const std::string &method, bool multipart = false, const std::string &fileKey = "");
+        telegram::structures::Message SendFile(const params::SendFileParams &params, 
+                                               const std::string &method, 
+                                               const std::function<std::string(telegram::structures::Message)> &idExtractor);
+        
+        void CacheFile(const std::string &typeString, const std::string &path, const std::string &id);
+        bool IsCached(const std::string &typeString, const std::string &path);
+        std::string GetCached(const std::string &typeString, const std::string &path);
     };
 }
 

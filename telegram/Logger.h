@@ -43,6 +43,7 @@ namespace telegram
             
             virtual int sync ()
             {
+                loggerMutex.lock();
                 if(Logger::IsSet(logger->level)) {
                     if(useColors) {
                         switch(logger->level) {
@@ -70,6 +71,7 @@ namespace telegram
                     output << std::flush;
                     str("");
                 }
+                loggerMutex.unlock();
                 return 0;
             }
         };

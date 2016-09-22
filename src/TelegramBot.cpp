@@ -1,5 +1,6 @@
 #include "TelegramBot.h"
 #include "params/SendMessageParams.h"
+#include "params/GetFileParams.h"
 
 using namespace telegram;
 using namespace telegram::params;
@@ -8,7 +9,7 @@ using namespace jsonserializer::structures;
 
 const std::map<std::string, std::string> TelegramBot::defaultHeader = {{"Content-Type", "application/json"}};
 
-void TelegramBot::Setup(const std::string &token, const std::string &path)
+void TelegramBot::Setup(std::string token, std::string configPath, std::string filePath)
 {   
 	Logger::info << R"( ____  ____  __    ____  ___  ____   __   _  _  ____   __  ____)" << std::endl;
 	Logger::info << R"((_  _)(  __)(  )  (  __)/ __)(  _ \ / _\ ( \/ )(  _ \ /  \(_  _))" << std::endl;
@@ -20,21 +21,32 @@ void TelegramBot::Setup(const std::string &token, const std::string &path)
 	Logger::info << R"((____/(__/    (__\_)\_/\_/\____/(__)  (__)  (____)(__\_))" << std::endl;
 	Logger::info << std::endl;
 
- 
+    // add trailing slashes if there are not any
+    if(configPath[configPath.size() - 1] != '/') {
+        configPath += '/';
+    }
+    
+    if(filePath[filePath.size() - 1] != '/') {
+        filePath += '/';
+    }
+    
     (*this)["token"] = token;
     
-    curl::RequestParams requestParams(GetApiUrl("getme"), curl::Method::POST);
+    curl::RequestParams requestParams(GetApiUrl("getMe"), curl::Method::POST);
     requestParams.SetHeaders(GetDefaultHeader());
     
     curl::Response response = session.DoRequest(requestParams);
-    
     auto json = Serializable::Deserialize(std::string(response.content.begin(), response.content.end()));
+    if(json == nullptr) {
+        throw TelegramException("Failed to get name for token " + token, response);
+    }
+    
     std::string botName = (*json)["result"]["username"].asString();
     
     Logger::debug << "botName: " << botName << std::endl;
-    
     (*this)["botName"] = botName;
-    PersistingService::SetFileName(path + botName + ".data");
+    
+    PersistingService::SetFileName(configPath + botName + ".data");
     
     try {
         PersistingService::Load();
@@ -52,6 +64,12 @@ void TelegramBot::Setup(const std::string &token, const std::string &path)
             throw TelegramException(error);
         }
     }
+    
+    // we need to set these strings here to not override it with the load above
+    (*this)["filePath"] = filePath;
+    (*this)["token"] = token;
+    
+    PersistingService::Save();
 }
 
 void TelegramBot::GetUpdates() 
@@ -104,14 +122,14 @@ void TelegramBot::GetUpdates()
     Save();
 }
 
-void TelegramBot::Process(TelegramBot *bot, std::string senderId) 
+void TelegramBot::Process(TelegramBot *bot, std::string chatId) 
 {
     while((*bot)["running"].asBool()) {
-        if(!bot->queue.Available(senderId)) {
+        if(!bot->queue.Available(chatId)) {
             std::this_thread::yield();
             continue;
         }
-        auto update = bot->queue.Pop(senderId);
+        auto update = bot->queue.Pop(chatId);
         
         Logger::debug << "processing update..." << std::endl;
             
@@ -194,6 +212,8 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
         if(methodName != "") {
             error += ". " + methodName + " failed";
         }
+        Logger::warn << error << std::endl;
+        return false;
         throw TelegramException(error, response);
     }
     
@@ -211,4 +231,39 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
     }
     
     return ok;
+}
+
+void TelegramBot::DownloadFile(telegram::structures::File file)
+{
+    std::string url = "https://api.telegram.org/file/bot" + (*this)["token"].asString() + "/";
+    if(file.filePath == nullptr) {
+        file = GetFile({ file.GetFileIdValue() });
+    }
+    
+    std::cout << url << file.GetFilePathValue() << std::endl;
+    auto response = session.DoRequest({url + file.GetFilePathValue()});
+    
+    std::string statusLine = response.headers["statusLine"];
+    statusLine = statusLine.substr(statusLine.find(" ") + 1);
+    int statusCode = std::stoi(statusLine.substr(0, statusLine.find(" ")));
+    
+    if(statusCode == 200) {
+        std::string extension = file.GetFilePathValue();
+        extension = extension.substr(extension.find("."));
+        std::string fileName = file.GetFileIdValue() + extension;
+        std::string path = (*this)["filePath"].asString();
+        
+        std::ofstream fsFile(path + fileName);
+        if(!fsFile.is_open()) {
+            throw TelegramException("Failed to create file!");
+        }
+        for(auto &c : response.content) {
+            fsFile.put(c);
+        }
+        fsFile.close();
+        
+        Logger::info << "Successfully wrote file " << path << fileName << std::endl;
+    } else {
+        throw TelegramException("Failed to download file!", response);
+    }
 }

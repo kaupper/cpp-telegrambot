@@ -58,7 +58,7 @@
 	"fields": [{
 		"cppName": "id",
 		"jsonName": "id",
-		"type": "int",
+		"type": "long",
 		"required": "true"
 	}, {
 		"cppName": "type",
@@ -236,12 +236,12 @@
 	}, {
 		"cppName": "migrateToChatId",
 		"jsonName": "migrate_to_chat_id",
-		"type": "int",
+		"type": "long",
 		"required": "false"
 	}, {
 		"cppName": "migrateFromChatId",
 		"jsonName": "migrate_from_chat_id",
-		"type": "int",
+		"type": "long",
 		"required": "false"
 	}, {
 		"cppName": "pinnedMessage",
