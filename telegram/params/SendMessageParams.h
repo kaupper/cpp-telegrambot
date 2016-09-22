@@ -11,7 +11,7 @@ namespace telegram::params
     class SendMessageParams : public jsonserializer::Serializable
     {
     public:
-        SendMessageParams(telegram::structures::Chat chat, std::string text);
+        SendMessageParams(const telegram::structures::Chat &chat, std::string text);
         
         SendMessageParams & SetParseMode(telegram::ParseMode mode);
         SendMessageParams & SetDisableWebPagePreview(bool disable);
@@ -19,7 +19,7 @@ namespace telegram::params
         SendMessageParams & SetReplyToMessageId(int reply);
         
         template <typename T, typename = typename std::enable_if<telegram::isMarkup<T>>::type>
-        SendMessageParams & SetReplyMarkup(T markup)            
+        SendMessageParams & SetReplyMarkup(const T &markup)            
         {
             (*this)["reply_markup"] = jsonserializer::structures::Converter::ToJSON(markup);
             return *this;

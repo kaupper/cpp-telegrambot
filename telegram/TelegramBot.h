@@ -29,6 +29,7 @@ namespace telegram
     {
         class SendMessageParams;
         class ForwardMessageParams;
+        class SendPhotoParams;
     }
     
     template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||
@@ -57,7 +58,8 @@ namespace telegram
         std::vector<GeneralCallback *> generalCallbacks;
         
         std::string GetApiUrl(const std::string &method) { return "https://api.telegram.org/bot" + (*this)["token"].asString() + "/" + method ; }
-        std::map<std::string, std::string> &GetDefaultHeader() { static std::map<std::string, std::string> defaultHeader = {{"Content-Type", "application/json"}}; return defaultHeader; }
+        static const std::map<std::string, std::string> defaultHeader;
+        std::map<std::string, std::string> GetDefaultHeader() { return defaultHeader; }
         
         void Setup(const std::string &token, const std::string &path);
         void GetUpdates();
@@ -123,10 +125,15 @@ namespace telegram
         
         // Bot API methods
         
-        telegram::structures::Message SendMessage(params::SendMessageParams &params);
-        telegram::structures::Message SendMessage(params::SendMessageParams &&params);
+        telegram::structures::Message SendMessage(const params::SendMessageParams &params);
+        telegram::structures::Message ForwardMessage(const params::ForwardMessageParams &params);
+        telegram::structures::Message SendPhoto(const params::SendPhotoParams &params);
         
         // TODO: add others
+        
+    private:
+        curl::Response DoMethod(const jsonserializer::Serializable &json, const std::string &method);
+        curl::Response DoMethod(const jsonserializer::Serializable &json, const std::string &method, bool multipart, const std::string &fileKey = "");
     };
 }
 

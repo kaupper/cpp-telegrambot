@@ -154,7 +154,7 @@
 		"type": "Document",
 		"required": "false"
 	}, {
-		"cppName": "photoSize",
+		"cppName": "photo",
 		"jsonName": "photo",
 		"type": "std::vector<PhotoSize>",
 		"required": "false"

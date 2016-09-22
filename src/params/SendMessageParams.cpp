@@ -2,7 +2,7 @@
 
 using namespace telegram::params;
 
-SendMessageParams::SendMessageParams(telegram::structures::Chat chat, std::string text) : jsonserializer::Serializable() 
+SendMessageParams::SendMessageParams(const telegram::structures::Chat &chat, std::string text) : jsonserializer::Serializable() 
 {   
     (*this)["chat_id"] = std::to_string(chat.GetIdValue());
     (*this)["text"] = text;

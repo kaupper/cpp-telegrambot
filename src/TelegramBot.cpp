@@ -6,6 +6,8 @@ using namespace telegram::params;
 using namespace telegram::structures;
 using namespace jsonserializer::structures;
 
+const std::map<std::string, std::string> TelegramBot::defaultHeader = {{"Content-Type", "application/json"}};
+
 void TelegramBot::Setup(const std::string &token, const std::string &path)
 {   
 	Logger::info << R"( ____  ____  __    ____  ___  ____   __   _  _  ____   __  ____)" << std::endl;

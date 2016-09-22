@@ -12,6 +12,8 @@ add_subdirectory(cpp-curlsession)
 
 set(SOURCES
 ${PROJECT_SOURCE_DIR}/src/params/SendMessageParams.cpp
+${PROJECT_SOURCE_DIR}/src/params/ForwardMessageParams.cpp
+${PROJECT_SOURCE_DIR}/src/params/SendPhotoParams.cpp
 ${PROJECT_SOURCE_DIR}/src/Command.cpp
 ${PROJECT_SOURCE_DIR}/src/CommandSet.cpp
 ${PROJECT_SOURCE_DIR}/src/Logger.cpp
