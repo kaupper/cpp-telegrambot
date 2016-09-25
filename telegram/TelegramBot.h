@@ -17,6 +17,8 @@
 #include "CommandSet.h"
 #include "GeneralCallback.h"
 
+#include "params.h"
+
 namespace telegram
 {
     enum class ParseMode
@@ -25,34 +27,7 @@ namespace telegram
         MARKDOWN = 1,
         HTML = 2
     };
-    
-    namespace params
-    {
-        class SendFileParams;
-        class SendMessageParams;
-        class ForwardMessageParams;
-        class SendPhotoParams;
-        class SendAudioParams;
-        class SendDocumentParams;
-        class SendStickerParams;
-        class SendVideoParams;
-        class SendVoiceParams;
-        class SendLocationParams;
-        class SendVenueParams;
-        class SendContactParams;
-        class SendChatActionParams;
-        class GetUserProfilePhotosParams;
-        class GetFileParams;
-        class KickChatMemberParams;
-        class LeaveChatParams;
-        class UnbanChatMemberParams;
-        class GetChatParams;
-        class GetChatAdministratorsParams;
-        class GetChatMembersCountParams;
-        class GetChatMemberParams;
-        class AnswerCallbackQueryParams;
-    }
-    
+   
     template <typename T> const bool isMarkup = std::is_same<T, telegram::structures::InlineKeyboardMarkup>::value ||
                                                 std::is_same<T, telegram::structures::ReplyKeyboardMarkup>::value ||
                                                 std::is_same<T, telegram::structures::ReplyKeyboardHide>::value ||
@@ -145,7 +120,7 @@ namespace telegram
         
         
         
-        void DownloadFile(telegram::structures::File);
+        void DownloadFile(const std::string &);
         
         // Bot API methods
         telegram::structures::Message SendMessage(const params::SendMessageParams &params);
@@ -174,7 +149,7 @@ namespace telegram
     private:
         // utility methods
         curl::Response DoMethod(const jsonserializer::Serializable &json, const std::string &method, bool multipart = false, const std::string &fileKey = "");
-        telegram::structures::Message SendFile(const params::SendFileParams &params, 
+        telegram::structures::Message SendFile(const Serializable &params, 
                                                const std::string &method, 
                                                const std::function<std::string(telegram::structures::Message)> &idExtractor);
         

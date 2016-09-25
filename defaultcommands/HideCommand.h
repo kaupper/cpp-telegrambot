@@ -2,7 +2,7 @@
 #define HIDE_COMMAND_H_
 
 #include "telegram/Command.h"
-#include "telegram/params/SendMessageParams.h"
+#include "params.h"
 
 class HideCommand : public telegram::Command
 {
@@ -11,8 +11,10 @@ public:
     
     virtual bool OnDirect(telegram::structures::Update &update)
     {
-        telegram::params::SendMessageParams params(update.message->GetChatValue(), "Hide the keyboard");
-        params.SetReplyMarkup(telegram::structures::ReplyKeyboardHide(true));
+        telegram::params::SendMessageParams params(update.message->GetChatValue().GetIdValue(), "Hide the keyboard");
+	telegram::params::ReplyMarkup replyMarkup;
+	replyMarkup.SetReplyKeyboardHide({true});
+        params.SetReplyMarkup(replyMarkup);
         bot.SendMessage(params);
         return false;
     }

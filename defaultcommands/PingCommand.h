@@ -2,7 +2,7 @@
 #define PING_COMMAND_H_
 
 #include "telegram/Command.h"
-#include "telegram/params/SendMessageParams.h"
+#include "params.h"
 
 class PingCommand : public telegram::Command
 {
@@ -11,7 +11,7 @@ public:
     
     virtual bool OnDirect(telegram::structures::Update &update)
     {
-        bot.SendMessage({update.GetMessage()->GetChatValue(), "pong"});
+        bot.SendMessage({update.GetMessageValue().GetChatValue().GetIdValue(), "pong"});
         return false;
     }
 };

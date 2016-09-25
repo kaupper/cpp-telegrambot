@@ -2,7 +2,7 @@
 #define COMMAND_H_
 
 #include "jsonserializer/StructConverter.h"
-#include "generated.h"
+#include "structures.h"
 
 #include "CommandException.h"
 

@@ -1,8 +1,8 @@
 #include "TelegramBot.h"
-#include "params/SendFileParams.h"
 
 using namespace telegram;
 using namespace telegram::structures;
+using namespace telegram::params;
 using namespace jsonserializer;
 using namespace jsonserializer::structures;
 
@@ -83,9 +83,23 @@ std::string TelegramBot::GetCached(const std::string &typeString, const std::str
     return (*this)["cache"][typeString][path]["id"].asString();
 }
 
-Message TelegramBot::SendFile(const params::SendFileParams &params, const std::string &method, const std::function<std::string(Message)> &idExtractor)
+Message TelegramBot::SendFile(const Serializable &params, const std::string &method, const std::function<std::string(Message)> &idExtractor)
 {    
-    std::string typeString = params.GetFileTypeString();
+    std::string typeString = "";
+    if(params.isMember("photo")) {
+        typeString = "photo";
+    } else if(params.isMember("audio")) {
+        typeString = "audio";
+    } else if(params.isMember("document")) {
+        typeString = "document";
+    } else if(params.isMember("sticker")) {
+        typeString = "sticker";
+    } else if(params.isMember("video")) {
+        typeString = "video";
+    } else if(params.isMember("voice")) {
+        typeString = "voice";
+    }
+    
     Serializable newParams = params;
     std::string path = params[typeString].asString();
     bool needUpload = true;
@@ -117,73 +131,73 @@ Message TelegramBot::SendFile(const params::SendFileParams &params, const std::s
 
 Message TelegramBot::SendMessage(const params::SendMessageParams &params)
 {
-    auto response = DoMethod((const Serializable &) params, "SendMessage");
+    auto response = DoMethod(Converter::ToJSON(params), "SendMessage");
     return Converter::FromJSON<Message>(getResponse(response, "SendMessage"));
 }
  
 Message TelegramBot::ForwardMessage(const params::ForwardMessageParams &params)
 {
-    auto response = DoMethod((const Serializable &) params, "ForwardMessage");
+    auto response = DoMethod(Converter::ToJSON(params), "ForwardMessage");
     return Converter::FromJSON<Message>(getResponse(response, "ForwardMessage"));
 }
  
 Message TelegramBot::SendPhoto(const params::SendPhotoParams &params)
 {
     auto idExtractor = [](Message message)->std::string { return message.GetPhotoValue()[0].GetFileIdValue(); };
-    return SendFile((const params::SendFileParams &)params, "SendPhoto", idExtractor);
+    return SendFile(Converter::ToJSON(params), "SendPhoto", idExtractor);
 }
 
 Message TelegramBot::SendAudio(const params::SendAudioParams &params)
 {
     auto idExtractor = [](Message message)->std::string { return message.GetAudio()->GetFileIdValue(); };
-    return SendFile((const params::SendFileParams &) params, "SendAudio", idExtractor);
+    return SendFile(Converter::ToJSON(params), "SendAudio", idExtractor);
 }
  
 Message TelegramBot::SendDocument(const params::SendDocumentParams &params)
 {
     auto idExtractor = [](Message message)->std::string { return message.GetDocument()->GetFileIdValue(); };
-    return SendFile((const params::SendFileParams &)params, "SendDocument", idExtractor);
+    return SendFile(Converter::ToJSON(params), "SendDocument", idExtractor);
 }
  
 Message TelegramBot::SendSticker(const params::SendStickerParams &params)
 {
     auto idExtractor = [](Message message)->std::string { return message.GetSticker()->GetFileIdValue(); };
-    return SendFile((const params::SendFileParams &)params, "SendSticker", idExtractor);
+    return SendFile(Converter::ToJSON(params), "SendSticker", idExtractor);
 }
 
 Message TelegramBot::SendVideo(const params::SendVideoParams &params)
 {
     auto idExtractor = [](Message message)->std::string { return message.GetVideo()->GetFileIdValue(); };
-    return SendFile((const params::SendFileParams &)params, "SendVideo", idExtractor);
+    return SendFile(Converter::ToJSON(params), "SendVideo", idExtractor);
 }
 
 Message TelegramBot::SendVoice(const params::SendVoiceParams &params)
 {
     auto idExtractor = [](Message message)->std::string { return message.GetVoice()->GetFileIdValue(); };
-    return SendFile((const params::SendFileParams &)params, "SendVoice", idExtractor);
+    return SendFile(Converter::ToJSON(params), "SendVoice", idExtractor);
 }
 
 Message TelegramBot::SendLocation(const params::SendLocationParams &params)
 {
-    auto response = DoMethod((const Serializable &) params, "SendLocation");
+    auto response = DoMethod(Converter::ToJSON(params), "SendLocation");
     return Converter::FromJSON<Message>(getResponse(response, "SendLocation"));
 }
 
 Message TelegramBot::SendVenue(const params::SendVenueParams &params)
 {
-    auto response = DoMethod((const Serializable &) params, "SendVenue");
+    auto response = DoMethod(Converter::ToJSON(params), "SendVenue");
     return Converter::FromJSON<Message>(getResponse(response, "SendVenue"));
 }
 
 Message TelegramBot::SendContact(const params::SendContactParams &params)
 {
-    auto response = DoMethod((const Serializable &) params, "SendContact");
+    auto response = DoMethod(Converter::ToJSON(params), "SendContact");
     return Converter::FromJSON<Message>(getResponse(response, "SendContact"));
 }
 
 bool TelegramBot::SendChatAction(const params::SendChatActionParams &params)
 {
-    auto response = DoMethod((const Serializable &) params, "SendChatAction");
+    auto response = DoMethod(Converter::ToJSON(params), "SendChatAction");
     return getResponse(response, "SendContact").asBool();
 }
 
@@ -192,60 +206,60 @@ bool TelegramBot::SendChatAction(const params::SendChatActionParams &params)
 // TODO: implement
 UserProfilePhotos TelegramBot::GetUserProfilePhotos(const params::GetUserProfilePhotosParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "GetUserProfilePhotos");
+    auto response = DoMethod(Converter::ToJSON(params), "GetUserProfilePhotos");
     return Converter::FromJSON<UserProfilePhotos>(getResponse(response, "GetUserProfilePhotos"));
 }
 
 File TelegramBot::GetFile(const params::GetFileParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "GetFile");
+    auto response = DoMethod(Converter::ToJSON(params), "GetFile");
     return Converter::FromJSON<File>(getResponse(response, "GetFile"));
 }
 
 bool TelegramBot::KickChatMember(const params::KickChatMemberParams &params) 
 {
-    auto response = DoMethod((const Serializable &) params, "KickChatMember");
+    auto response = DoMethod(Converter::ToJSON(params), "KickChatMember");
     return getResponse(response, "KickChatMember").asBool();
 }
 
 bool TelegramBot::LeaveChat(const params::LeaveChatParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "LeaveChat");
+    auto response = DoMethod(Converter::ToJSON(params), "LeaveChat");
     return getResponse(response, "LeaveChat").asBool();
 }
 
 bool TelegramBot::UnbanChatMember(const params::UnbanChatMemberParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "UnbanChatMember");
+    auto response = DoMethod(Converter::ToJSON(params), "UnbanChatMember");
     return getResponse(response, "UnbanChatMember").asBool();
 }
 
 Chat TelegramBot::GetChat(const params::GetChatParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "GetChat");
+    auto response = DoMethod(Converter::ToJSON(params), "GetChat");
     return Converter::FromJSON<Chat>(getResponse(response, "GetChat"));
 }
 
 std::vector<ChatMember> TelegramBot::GetChatAdministrators(const params::GetChatAdministratorsParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "GetChatAdministrators");
+    auto response = DoMethod(Converter::ToJSON(params), "GetChatAdministrators");
     return Converter::FromJSON<std::vector<ChatMember>>(getResponse(response, "GetChatAdministrators"));
 }
 
 int TelegramBot::GetChatMembersCount(const params::GetChatMembersCountParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "GetChatMembersCount");
+    auto response = DoMethod(Converter::ToJSON(params), "GetChatMembersCount");
     return getResponse(response, "GetChatMembersCount").asInt();
 }
 
 ChatMember TelegramBot::GetChatMember(const params::GetChatMemberParams &params) 
 {
-    auto response = DoMethod((const Serializable &) params, "GetChatMember");
+    auto response = DoMethod(Converter::ToJSON(params), "GetChatMember");
     return Converter::FromJSON<ChatMember>(getResponse(response, "GetChatMember"));
 }
 
 bool TelegramBot::AnswerCallbackQuery(const params::AnswerCallbackQueryParams &params) 
 { 
-    auto response = DoMethod((const Serializable &) params, "AnswerCallbackQuery");
+    auto response = DoMethod(Converter::ToJSON(params), "AnswerCallbackQuery");
     return getResponse(response, "AnswerCallbackQuery").asBool();
 }

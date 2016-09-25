@@ -1,6 +1,4 @@
 #include "TelegramBot.h"
-#include "params/SendMessageParams.h"
-#include "params/GetFileParams.h"
 
 using namespace telegram;
 using namespace telegram::params;
@@ -233,12 +231,10 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
     return ok;
 }
 
-void TelegramBot::DownloadFile(telegram::structures::File file)
+void TelegramBot::DownloadFile(const std::string &fileId)
 {
     std::string url = "https://api.telegram.org/file/bot" + (*this)["token"].asString() + "/";
-    if(file.filePath == nullptr) {
-        file = GetFile({ file.GetFileIdValue() });
-    }
+    auto file = GetFile({ fileId });
     
     std::cout << url << file.GetFilePathValue() << std::endl;
     auto response = session.DoRequest({url + file.GetFilePathValue()});
