@@ -40,32 +40,28 @@ namespace telegram
         auto & operator[](T &&key) { return Json::Value::operator[](key); }
     
         std::map<std::string, Storage *> dataStore;
-    
         curl::CurlSession session;
         std::thread daemon;
-        
         UpdateQueue queue;
         std::map<std::string, std::thread *> processingThreads;
-        
-        static void Process(TelegramBot *bot, std::string);
-        
         CommandSet defaultCommandSet;
         std::vector<CommandSet *> commandSets;
         std::vector<GeneralCallback *> generalCallbacks;
+        std::mutex jsonMutex;
+        std::mutex startMutex;
         
-        std::string GetApiUrl(const std::string &method) { return "https://api.telegram.org/bot" + (*this)["token"].asString() + "/" + method ; }
         static const std::map<std::string, std::string> defaultHeader;
+        static void Process(TelegramBot *bot, std::string);
+        
+	std::string GetApiUrl(const std::string &method) { return "https://api.telegram.org/bot" + (*this)["token"].asString() + "/" + method ; }
         std::map<std::string, std::string> GetDefaultHeader() { return defaultHeader; }
         
         void Setup(std::string token, std::string configPath, std::string filePath);
         void GetUpdates();
-
         bool CheckResponse(curl::Response &response, const std::string &methodName);
         
         
-        std::mutex jsonMutex;
-        
-        Json::Value & _GetSynchronized(Json::Value &value) { return value; }
+	Json::Value & _GetSynchronized(Json::Value &value) { return value; }
         
         template <typename T, typename... U>
         Json::Value & _GetSynchronized(Json::Value &value, T &&selector, U &&... selectors)
@@ -81,14 +77,13 @@ namespace telegram
         template <typename T, typename... U>
         Json::Value & Get(T &&selector, U &&... selectors) 
         {
-            return _GetSynchronized(*((Json::Value *)this), selector, selectors...);
+            return _GetSynchronized(*((Json::Value *) this), selector, selectors...);
         }  
         
         // public constructor used by users
         TelegramBot(const std::string &token, const std::string &configPath = "./", const std::string &filePath = "./") : PersistingService(),
             defaultCommandSet(*this) { Setup(token, configPath, filePath); }
             
-        
         virtual ~TelegramBot();
         
         std::map<std::string, Storage *> & GetDataStore() { return dataStore; }
@@ -103,7 +98,7 @@ namespace telegram
         }
         
         template <typename T, typename = typename std::enable_if<std::is_base_of<Command, T>::value>::type> 
-        T &RegisterCommand(std::string name) 
+        T &RegisterCommand(const std::string &name) 
         {            
             return defaultCommandSet.RegisterCommand<T>(*this, name);
         }

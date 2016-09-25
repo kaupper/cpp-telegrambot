@@ -179,21 +179,32 @@ TelegramBot::~TelegramBot()
     for(auto &e : dataStore) {
         delete e.second;
     }
+    
+    startMutex.lock();
+    startMutex.unlock();
+    
+    (*this)["running"] = false;
+
     for(auto &t : processingThreads) {
         t.second->join();
         delete t.second;
     }
+    daemon.join();
 }
+
 
 void TelegramBot::Start(bool inBackground)
 {
     if(inBackground) {
-        daemon = std::thread([this] { Start(false); });
+        startMutex.lock();
+	daemon = std::thread([this] { this->Start(false); });
         return;
     }
+    startMutex.try_lock();
+    (*this)["running"] = true;
+    startMutex.unlock();
     
     Logger::info << "Bot started" << std::endl;
-    (*this)["running"] = true;
     
     auto delay = std::chrono::milliseconds(500);
     while ((*this)["running"].asBool()) {
@@ -212,13 +223,10 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
         }
         Logger::warn << error << std::endl;
         return false;
-        throw TelegramException(error, response);
     }
     
     bool ok = (*json)["ok"].asBool();
-    if(ok) {
-        
-    } else {
+    if(!ok) {
         std::string description = (*json)["description"].asString();
         if(methodName != "") {
             Logger::warn << "Call to " << methodName << " failed" << std::endl;
@@ -236,8 +244,7 @@ void TelegramBot::DownloadFile(const std::string &fileId)
     std::string url = "https://api.telegram.org/file/bot" + (*this)["token"].asString() + "/";
     auto file = GetFile({ fileId });
     
-    std::cout << url << file.GetFilePathValue() << std::endl;
-    auto response = session.DoRequest({url + file.GetFilePathValue()});
+    auto response = session.DoRequest({ url + file.GetFilePathValue() });
     
     std::string statusLine = response.headers["statusLine"];
     statusLine = statusLine.substr(statusLine.find(" ") + 1);
