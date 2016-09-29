@@ -53,7 +53,7 @@ namespace telegram
         static const std::map<std::string, std::string> defaultHeader;
         static void Process(TelegramBot *bot, std::string);
         
-	std::string GetApiUrl(const std::string &method) { return "https://api.telegram.org/bot" + (*this)["token"].asString() + "/" + method ; }
+        std::string GetApiUrl(const std::string &method) { return "https://api.telegram.org/bot" + (*this)["token"].asString() + "/" + method ; }
         std::map<std::string, std::string> GetDefaultHeader() { return defaultHeader; }
         
         void Setup(std::string token, std::string configPath, std::string filePath);
@@ -61,7 +61,7 @@ namespace telegram
         bool CheckResponse(curl::Response &response, const std::string &methodName);
         
         
-	Json::Value & _GetSynchronized(Json::Value &value) { return value; }
+        Json::Value & _GetSynchronized(Json::Value &value) { return value; }
         
         template <typename T, typename... U>
         Json::Value & _GetSynchronized(Json::Value &value, T &&selector, U &&... selectors)
@@ -140,6 +140,15 @@ namespace telegram
         int GetChatMembersCount(const params::GetChatMembersCountParams &params);
         telegram::structures::ChatMember GetChatMember(const params::GetChatMemberParams &params);
         bool AnswerCallbackQuery(const params::AnswerCallbackQueryParams &params);
+        telegram::structures::Message EditMessageText(const params::EditMessageTextParams &params);
+        telegram::structures::Message EditMessageCaption(const params::EditMessageCaptionParams &params);
+        telegram::structures::Message EditMessageReplyMarkup(const params::EditMessageReplyMarkupParams &params);
+        
+        // methods for inline messages
+        bool EditInlineMessageText(const params::EditMessageTextParams &params);
+        bool EditInlineMessageCaption(const params::EditMessageCaptionParams &params);
+        bool EditInlineMessageReplyMarkup(const params::EditMessageReplyMarkupParams &params);
+        bool AnswerInlineQuery(const params::AnswerInlineQueryParams &params);
         
     private:
         // utility methods

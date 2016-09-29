@@ -263,3 +263,69 @@ bool TelegramBot::AnswerCallbackQuery(const params::AnswerCallbackQueryParams &p
     auto response = DoMethod(Converter::ToJSON(params), "AnswerCallbackQuery");
     return getResponse(response, "AnswerCallbackQuery").asBool();
 }
+
+Message TelegramBot::EditMessageText(const params::EditMessageTextParams &params)
+{
+    if(params.inlineMessageId != nullptr) {
+        throw TelegramException("Inline message id set. This is not allowed for normal message modifications!");
+    }
+    
+    auto response = DoMethod(Converter::ToJSON(params), "EditMessageText");
+    return Converter::FromJSON<Message>(getResponse(response, "EditMessageText"));
+}
+
+Message TelegramBot::EditMessageCaption(const params::EditMessageCaptionParams &params)
+{
+    if(params.inlineMessageId != nullptr) {
+        throw TelegramException("Inline message id set. This is not allowed for normal message modifications!");
+    }
+    
+    auto response = DoMethod(Converter::ToJSON(params), "EditMessageCaption");
+    return Converter::FromJSON<Message>(getResponse(response, "EditMessageCaption"));
+}
+
+Message TelegramBot::EditMessageReplyMarkup(const params::EditMessageReplyMarkupParams &params)
+{
+    if(params.inlineMessageId != nullptr) {
+        throw TelegramException("Inline message id set. This is not allowed for normal message modifications!");
+    }
+    
+    auto response = DoMethod(Converter::ToJSON(params), "EditMessageReplyMarkup");
+    return Converter::FromJSON<Message>(getResponse(response, "EditMessageReplyMarkup"));
+}
+
+bool TelegramBot::EditInlineMessageText(const params::EditMessageTextParams &params)
+{
+    if(params.chatId != nullptr || params.messageId != nullptr) {
+        throw TelegramException("Chat id or message id set. This is not allowed for inline message modifications!");
+    }
+    
+    auto response = DoMethod(Converter::ToJSON(params), "EditMessageText");
+    return getResponse(response, "EditInlineMessageText").asBool();
+}
+
+bool TelegramBot::EditInlineMessageCaption(const params::EditMessageCaptionParams &params)
+{
+    if(params.chatId != nullptr || params.messageId != nullptr) {
+        throw TelegramException("Chat id or message id set. This is not allowed for inline message modifications!");
+    }
+    
+    auto response = DoMethod(Converter::ToJSON(params), "EditMessageCaption");
+    return getResponse(response, "EditInlineMessageCaption").asBool();
+}
+
+bool TelegramBot::EditInlineMessageReplyMarkup(const params::EditMessageReplyMarkupParams &params)
+{
+    if(params.chatId != nullptr || params.messageId != nullptr) {
+        throw TelegramException("Chat id or message id set. This is not allowed for inline message modifications!");
+    }
+    
+    auto response = DoMethod(Converter::ToJSON(params), "EditMessageReplyMarkup");
+    return getResponse(response, "EditInlineMessageReplyMarkup").asBool();
+}
+
+bool TelegramBot::AnswerInlineQuery(const params::AnswerInlineQueryParams &params)
+{
+    auto response = DoMethod(Converter::ToJSON(params), "AnswerInlineQuery");
+    return getResponse(response, "AnswerInlineQuery").asBool();
+}

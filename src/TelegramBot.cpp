@@ -66,6 +66,7 @@ void TelegramBot::Setup(std::string token, std::string configPath, std::string f
     // we need to set these strings here to not override it with the load above
     (*this)["filePath"] = filePath;
     (*this)["token"] = token;
+    (*this)["background"] = false;
     
     PersistingService::Save();
 }
@@ -189,7 +190,9 @@ TelegramBot::~TelegramBot()
         t.second->join();
         delete t.second;
     }
-    daemon.join();
+    if((*this)["background"].asBool()) {
+        daemon.join();
+    }
 }
 
 
@@ -197,7 +200,8 @@ void TelegramBot::Start(bool inBackground)
 {
     if(inBackground) {
         startMutex.lock();
-	daemon = std::thread([this] { this->Start(false); });
+        (*this)["background"] = true;
+        daemon = std::thread([this] { this->Start(false); });
         return;
     }
     startMutex.try_lock();
@@ -234,6 +238,8 @@ bool TelegramBot::CheckResponse(curl::Response &response, const std::string &met
             Logger::warn << "HTTP Request failed" << std::endl;
         }
         Logger::warn << "Reason: " << description << std::endl;
+        Logger::warn << "Code: " << (*json)["error_code"].asString() << std::endl;
+        Logger::warn << "Result: " << std::string(response.content.begin(), response.content.end()) << std::endl;
     }
     
     return ok;
