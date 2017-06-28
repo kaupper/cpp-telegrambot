@@ -7,9 +7,9 @@ function(add_external name repo)
     set(EXTERNAL_GIT_REPOSITORY ${repo})
     configure_file(cmake/CMakeLists.txt.in ${DOWNLOAD_PATH}/CMakeLists.txt)
     execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${DOWNLOAD_PATH}")
+                    WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/${DOWNLOAD_PATH}")
     execute_process(COMMAND "${CMAKE_COMMAND}" --build .
-                    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/${DOWNLOAD_PATH}")
+                    WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/${DOWNLOAD_PATH}")
 endfunction(add_external)
 
 add_external("jsonserializer" "http://github.com/skaupper/cpp-jsonserializer.git")
@@ -17,8 +17,8 @@ add_external("curlsession" "http://github.com/skaupper/cpp-curlsession.git")
 
 set(JSON_CONFIGURATION_FILES request.json telegram.json)
 set(JSON_OUTPUT_DIR generated/)
-add_subdirectory(${CMAKE_BINARY_DIR}/jsonserializer ${CMAKE_BINARY_DIR}/jsonserializer/build)
-add_subdirectory(${CMAKE_BINARY_DIR}/curlsession ${CMAKE_BINARY_DIR}/curlsession/build)
+add_subdirectory(${PROJECT_BINARY_DIR}/jsonserializer ${PROJECT_BINARY_DIR}/jsonserializer/build)
+add_subdirectory(${PROJECT_BINARY_DIR}/curlsession ${PROJECT_BINARY_DIR}/curlsession/build)
 
 set(SOURCES
 ${JSON_SOURCES}
