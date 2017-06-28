@@ -1,25 +1,28 @@
 #include "TelegramBotUtilities.h"
 
 using namespace telegram;
-using namespace telegram::params;
+using namespace telegram::request;
 using namespace telegram::structures;
 
 
-InlineKeyboardButton TelegramBotUtilities::IBData(const std::string &text, const std::string &callbackData)
+InlineKeyboardButton TelegramBotUtilities::IBData(const std::string &text,
+        const std::string &callbackData)
 {
     InlineKeyboardButton button(text);
     button.SetCallbackData(callbackData);
     return button;
 }
 
-InlineKeyboardButton TelegramBotUtilities::IBUrl(const std::string &text, const std::string &url)
+InlineKeyboardButton TelegramBotUtilities::IBUrl(const std::string &text,
+        const std::string &url)
 {
     InlineKeyboardButton button(text);
     button.SetUrl(url);
     return button;
 }
 
-InlineKeyboardButton TelegramBotUtilities::IBQuery(const std::string &text, const std::string &switchInlineQuery)
+InlineKeyboardButton TelegramBotUtilities::IBQuery(const std::string &text,
+        const std::string &switchInlineQuery)
 {
     InlineKeyboardButton button(text);
     button.SetSwitchInlineQuery(switchInlineQuery);
@@ -27,7 +30,8 @@ InlineKeyboardButton TelegramBotUtilities::IBQuery(const std::string &text, cons
 }
 
 
-InlineQueryResult TelegramBotUtilities::IQRArticle(const std::string &id, const std::string &title, const structures::InputMessageContent &content)
+InlineQueryResult TelegramBotUtilities::IQRArticle(const std::string &id,
+        const std::string &title, const structures::InputMessageContent &content)
 {
     InlineQueryResultArticle article(title, content);
     InlineQueryResult result("article", id);
@@ -44,7 +48,8 @@ InputMessageContent TelegramBotUtilities::IMCText(const std::string &text)
     return resultContent;
 }
 
-EditMessageTextParams TelegramBotUtilities::EMTParams(const std::string &text, const std::string &chatId, int messageId)
+EditMessageTextParams TelegramBotUtilities::EMTParams(const std::string &text,
+        const std::string &chatId, int messageId)
 {
     EditMessageTextParams params(text);
     params.SetChatId(chatId);
@@ -52,7 +57,8 @@ EditMessageTextParams TelegramBotUtilities::EMTParams(const std::string &text, c
     return params;
 }
 
-EditMessageTextParams TelegramBotUtilities::EMTParamsInline(const std::string &text, const std::string &inlineMessageId)
+EditMessageTextParams TelegramBotUtilities::EMTParamsInline(
+    const std::string &text, const std::string &inlineMessageId)
 {
     EditMessageTextParams params(text);
     params.SetInlineMessageId(inlineMessageId);

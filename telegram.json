@@ -1,1674 +1,1611 @@
-[{
-	"fields": [{
-		"cppName": "updateId",
-		"jsonName": "update_id",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "message",
-		"jsonName": "message",
-		"type": "Message",
-		"required": "false"
-	}, {
-		"cppName": "editedMessage",
-		"jsonName": "edited_message",
-		"type": "Message",
-		"required": "false"
-	}, {
-		"cppName": "inlineQuery",
-		"jsonName": "inline_query",
-		"type": "InlineQuery",
-		"required": "false"
-	}, {
-		"cppName": "chosenInlineResult",
-		"jsonName": "chosen_inline_result",
-		"type": "ChosenInlineResult",
-		"required": "false"
-	}, {
-		"cppName": "callbackQuery",
-		"jsonName": "callback_query",
-		"type": "CallbackQuery",
-		"required": "false"
-	}],
-	"name": "Update"
-}, {
-	"fields": [{
-		"cppName": "id",
-		"jsonName": "id",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "firstName",
-		"jsonName": "first_name",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "lastName",
-		"jsonName": "last_name",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "userName",
-		"jsonName": "username",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "User"
-}, {
-	"fields": [{
-		"cppName": "id",
-		"jsonName": "id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "type",
-		"jsonName": "type",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "userName",
-		"jsonName": "username",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "firstName",
-		"jsonName": "first_name",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "lastName",
-		"jsonName": "last_name",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "Chat"
-}, {
-	"fields": [{
-		"cppName": "messageId",
-		"jsonName": "message_id",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "from",
-		"jsonName": "from",
-		"type": "User",
-		"required": "false"
-	}, {
-		"cppName": "date",
-		"jsonName": "date",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "chat",
-		"jsonName": "chat",
-		"type": "Chat",
-		"required": "true"
-	}, {
-		"cppName": "forwardFrom",
-		"jsonName": "forward_from",
-		"type": "User",
-		"required": "false"
-	}, {
-		"cppName": "forwardFromChat",
-		"jsonName": "forward_from_chat",
-		"type": "Chat",
-		"required": "false"
-	}, {
-		"cppName": "forwardDate",
-		"jsonName": "forward_date",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "replyToMessage",
-		"jsonName": "reply_to_message",
-		"type": "Message",
-		"required": "false"
-	}, {
-		"cppName": "editDate",
-		"jsonName": "edit_date",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "text",
-		"jsonName": "text",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "entities",
-		"jsonName": "entities",
-		"type": "std::vector<MessageEntity>",
-		"required": "false"
-	}, {
-		"cppName": "audio",
-		"jsonName": "audio",
-		"type": "Audio",
-		"required": "false"
-	}, {
-		"cppName": "document",
-		"jsonName": "document",
-		"type": "Document",
-		"required": "false"
-	}, {
-		"cppName": "photo",
-		"jsonName": "photo",
-		"type": "std::vector<PhotoSize>",
-		"required": "false"
-	}, {
-		"cppName": "sticker",
-		"jsonName": "sticker",
-		"type": "Sticker",
-		"required": "false"
-	}, {
-		"cppName": "video",
-		"jsonName": "video",
-		"type": "Video",
-		"required": "false"
-	}, {
-		"cppName": "voice",
-		"jsonName": "voice",
-		"type": "Voice",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "contact",
-		"jsonName": "contact",
-		"type": "Contact",
-		"required": "false"
-	}, {
-		"cppName": "location",
-		"jsonName": "location",
-		"type": "Location",
-		"required": "false"
-	}, {
-		"cppName": "venue",
-		"jsonName": "venue",
-		"type": "Venue",
-		"required": "false"
-	}, {
-		"cppName": "newChatMember",
-		"jsonName": "new_chat_member",
-		"type": "User",
-		"required": "false"
-	}, {
-		"cppName": "leftChatMember",
-		"jsonName": "left_chat_member",
-		"type": "User",
-		"required": "false"
-	}, {
-		"cppName": "newChatTitle",
-		"jsonName": "new_chat_title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "newChatPhoto",
-		"jsonName": "new_chat_photo",
-		"type": "std::vector<PhotoSize>",
-		"required": "false"
-	}, {
-		"cppName": "deleteChatPhoto",
-		"jsonName": "delete_chat_photo",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "groupChatCreated",
-		"jsonName": "group_chat_created",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "superGroupChatCreated",
-		"jsonName": "supegroup_chat_created",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "channelChatCreated",
-		"jsonName": "channel_chat_created",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "migrateToChatId",
-		"jsonName": "migrate_to_chat_id",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "migrateFromChatId",
-		"jsonName": "migrate_from_chat_id",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "pinnedMessage",
-		"jsonName": "pinned_message",
-		"type": "Message",
-		"required": "false"
-	}],
-	"name": "Message"
-}, {
-	"fields": [{
-		"cppName": "type",
-		"jsonName": "type",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "offset",
-		"jsonName": "offset",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "length",
-		"jsonName": "length",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "url",
-		"jsonName": "url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "user",
-		"jsonName": "user",
-		"type": "User",
-		"required": "false"
-	}],
-	"name": "MessageEntity"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "width",
-		"jsonName": "width",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "height",
-		"jsonName": "height",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "PhotoSize"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "duration",
-		"jsonName": "duration",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "performer",
-		"jsonName": "performer",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "mimeType",
-		"jsonName": "mime_type",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "Audio"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "thumb",
-		"jsonName": "thumb",
-		"type": "PhotoSize",
-		"required": "false"
-	}, {
-		"cppName": "fileName",
-		"jsonName": "file_name",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "mimeType",
-		"jsonName": "mime_type",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "Document"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "width",
-		"jsonName": "width",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "height",
-		"jsonName": "height",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "thumb",
-		"jsonName": "thumb",
-		"type": "PhotoSize",
-		"required": "false"
-	}, {
-		"cppName": "emoji",
-		"jsonName": "emoji",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "Sticker"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "width",
-		"jsonName": "width",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "height",
-		"jsonName": "height",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "duration",
-		"jsonName": "duration",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "thumb",
-		"jsonName": "thumb",
-		"type": "PhotoSize",
-		"required": "false"
-	}, {
-		"cppName": "mimeType",
-		"jsonName": "mime_type",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "Video"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "duration",
-		"jsonName": "duration",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "mimeType",
-		"jsonName": "mime_type",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "Voice"
-}, {
-	"fields": [{
-		"cppName": "phoneNumber",
-		"jsonName": "phone_number",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "firstName",
-		"jsonName": "first_name",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "lastName",
-		"jsonName": "last_name",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "userId",
-		"jsonName": "user_id",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "Contact"
-}, {
-	"fields": [{
-		"cppName": "longitude",
-		"jsonName": "longitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "latitude",
-		"jsonName": "latitude",
-		"type": "float",
-		"required": "true"
-	}],
-	"name": "Location"
-}, {
-	"fields": [{
-		"cppName": "location",
-		"jsonName": "location",
-		"type": "Location",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "address",
-		"jsonName": "address",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "foursquareId",
-		"jsonName": "foursquare_id",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "Venue"
-}, {
-	"fields": [{
-		"cppName": "totalCount",
-		"jsonName": "total_count",
-		"type": "int",
-		"required": "true"
-	}, {
-		"cppName": "photos",
-		"jsonName": "photos",
-		"type": "std::vector<std::vector<PhotoSize>>",
-		"required": "true"
-	}],
-	"name": "UserProfilePhotos"
-}, {
-	"fields": [{
-		"cppName": "fileId",
-		"jsonName": "file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "fileSize",
-		"jsonName": "file_size",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "filePath",
-		"jsonName": "file_path",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "File"
-}, {
-	"fields": [{
-		"cppName": "keyboard",
-		"jsonName": "keyboard",
-		"type": "std::vector<std::vector<KeyboardButton>>",
-		"required": "true"
-	}, {
-		"cppName": "resizeKeyboard",
-		"jsonName": "resize_keyboard",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "oneTimeKeyboard",
-		"jsonName": "one_time_keyboard",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "selective",
-		"jsonName": "selective",
-		"type": "bool",
-		"required": "false"
-	}],
-	"name": "ReplyKeyboardMarkup"
-}, {
-	"fields": [{
-		"cppName": "text",
-		"jsonName": "text",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "requestContact",
-		"jsonName": "request_contact",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "requestLocation",
-		"jsonName": "request_location",
-		"type": "bool",
-		"required": "false"
-	}],
-	"name": "KeyboardButton"
-}, {
-	"fields": [{
-		"cppName": "hideKeyboard",
-		"jsonName": "hide_keyboard",
-		"type": "bool",
-		"required": "true"
-	}, {
-		"cppName": "selective",
-		"jsonName": "selective",
-		"type": "bool",
-		"required": "false"
-	}],
-	"name": "ReplyKeyboardHide"
-}, {
-	"fields": [{
-		"cppName": "inlineKeyboard",
-		"jsonName": "inline_keyboard",
-		"type": "std::vector<std::vector<InlineKeyboardButton>>",
-		"required": "true"
-	}],
-	"name": "InlineKeyboardMarkup"
-}, {
-	"fields": [{
-		"cppName": "text",
-		"jsonName": "text",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "url",
-		"jsonName": "url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "callbackData",
-		"jsonName": "callback_data",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "switchInlineQuery",
-		"jsonName": "switch_inline_query",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "InlineKeyboardButton"
-}, {
-	"fields": [{
-		"cppName": "id",
-		"jsonName": "id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "from",
-		"jsonName": "from",
-		"type": "User",
-		"required": "true"
-	}, {
-		"cppName": "message",
-		"jsonName": "message",
-		"type": "Message",
-		"required": "false"
-	}, {
-		"cppName": "inlineMessageId",
-		"jsonName": "inline_message_id",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "data",
-		"jsonName": "data",
-		"type": "std::string",
-		"required": "true"
-	}],
-	"name": "CallbackQuery"
-}, {
-	"fields": [{
-		"cppName": "forceReply",
-		"jsonName": "force_reply",
-		"type": "bool",
-		"required": "true"
-	}, {
-		"cppName": "selective",
-		"jsonName": "selective",
-		"type": "bool",
-		"required": "false"
-	}],
-	"name": "ForceReply"
-}, {
-	"fields": [{
-		"cppName": "user",
-		"jsonName": "user",
-		"type": "User",
-		"required": "true"
-	}, {
-		"cppName": "status",
-		"jsonName": "status",
-		"type": "std::string",
-		"required": "true"
-	}],
-	"name": "ChatMember"
-}, {
-	"fields": [{
-		"cppName": "id",
-		"jsonName": "id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "from",
-		"jsonName": "from",
-		"type": "User",
-		"required": "true"
-	}, {
-		"cppName": "location",
-		"jsonName": "location",
-		"type": "Location",
-		"required": "false"
-	}, {
-		"cppName": "query",
-		"jsonName": "query",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "offset",
-		"jsonName": "offset",
-		"type": "std::string",
-		"required": "true"
-	}],
-	"name": "InlineQuery"
-}, {
-	"fields": [{
-		"cppName": "resultId",
-		"jsonName": "result_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "from",
-		"jsonName": "from",
-		"type": "User",
-		"required": "true"
-	}, {
-		"cppName": "location",
-		"jsonName": "location",
-		"type": "Location",
-		"required": "false"
-	}, {
-		"cppName": "inlineMessageId",
-		"jsonName": "inline_message_id",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "query",
-		"jsonName": "query",
-		"type": "std::string",
-		"required": "true"
-	}],
-	"name": "ChosenInlineResult"
-}, {
-	"fields": [{
-		"cppName": "type",
-		"jsonName": "type",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "id",
-		"jsonName": "id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "article",
-		"type": "InlineQueryResultArticle",
-		"required": "false"
-	}, {
-		"cppName": "photo",
-		"type": "InlineQueryResultPhoto",
-		"required": "false"
-	}, {
-		"cppName": "gif",
-		"type": "InlineQueryResultGif",
-		"required": "false"
-	}, {
-		"cppName": "mpeg4",
-		"type": "InlineQueryResultMpeg4Gif",
-		"required": "false"
-	}, {
-		"cppName": "video",
-		"type": "InlineQueryResultVideo",
-		"required": "false"
-	}, {
-		"cppName": "audio",
-		"type": "InlineQueryResultAudio",
-		"required": "false"
-	}, {
-		"cppName": "voice",
-		"type": "InlineQueryResultVoice",
-		"required": "false"
-	}, {
-		"cppName": "document",
-		"type": "InlineQueryResultDocument",
-		"required": "false"
-	}, {
-		"cppName": "location",
-		"type": "InlineQueryResultLocation",
-		"required": "false"
-	}, {
-		"cppName": "venue",
-		"type": "InlineQueryResultVenue",
-		"required": "false"
-	}, {
-		"cppName": "contact",
-		"type": "InlineQueryResultContact",
-		"required": "false"
-	}, {
-		"cppName": "cachedPhoto",
-		"type": "InlineQueryResultCachedPhoto",
-		"required": "false"
-	}, {
-		"cppName": "cachedGif",
-		"type": "InlineQueryResultCachedGif",
-		"required": "false"
-	}, {
-		"cppName": "cachedMpeg4",
-		"type": "InlineQueryResultCachedMpeg4Gif",
-		"required": "false"
-	}, {
-		"cppName": "cachedSticker",
-		"type": "InlineQueryResultCachedSticker",
-		"required": "false"
-	}, {
-		"cppName": "cachedDocument",
-		"type": "InlineQueryResultCachedDocument",
-		"required": "false"
-	}, {
-		"cppName": "cachedVideo",
-		"type": "InlineQueryResultCachedVideo",
-		"required": "false"
-	}, {
-		"cppName": "cachedVoice",
-		"type": "InlineQueryResultCachedVoice",
-		"required": "false"
-	}, {
-		"cppName": "cachedAudio",
-		"type": "InlineQueryResultCachedAudio",
-		"required": "false"
-	}],
-	"name": "InlineQueryResult"
-}, {
-	"fields": [{
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "true"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "url",
-		"jsonName": "url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "hideUrl",
-		"jsonName": "hide_url",
-		"type": "bool",
-		"required": "false"
-	}, {
-		"cppName": "description",
-		"jsonName": "description",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "thumbWidth",
-		"jsonName": "thumb_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbHeight",
-		"jsonName": "thumb_height",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultArticle",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "photoUrl",
-		"jsonName": "photo_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "photoWidth",
-		"jsonName": "photo_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "photoHeight",
-		"jsonName": "photo_height",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "description",
-		"jsonName": "description",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultPhoto",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "gifUrl",
-		"jsonName": "gif_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "gifWidth",
-		"jsonName": "gif_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "gifHeight",
-		"jsonName": "gif_height",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultGif",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "mpeg4Url",
-		"jsonName": "mpeg4_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "mpeg4Width",
-		"jsonName": "mpeg4_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "mpeg4Height",
-		"jsonName": "mpeg4_height",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultMpeg4Gif",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "videoUrl",
-		"jsonName": "video_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "mimeType",
-		"jsonName": "mime_type",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "videoWidth",
-		"jsonName": "video_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "videoHeight",
-		"jsonName": "video_height",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "videoDuration",
-		"jsonName": "video_duration",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "description",
-		"jsonName": "description",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultVideo",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "audioUrl",
-		"jsonName": "audio_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "performer",
-		"jsonName": "performer",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultAudio",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "voiceUrl",
-		"jsonName": "voice_url",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "voiceDuration",
-		"jsonName": "voice_duration",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultVoice",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "document_url",
-		"jsonName": "documentUrl",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "mime_type",
-		"jsonName": "mimeType",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "thumbWidth",
-		"jsonName": "thumb_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbHeight",
-		"jsonName": "thumb_height",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultDocument",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "latitude",
-		"jsonName": "latitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "longitude",
-		"jsonName": "longitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "thumbWidth",
-		"jsonName": "thumb_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbHeight",
-		"jsonName": "thumb_height",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultLocation",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "latitude",
-		"jsonName": "latitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "longitude",
-		"jsonName": "longitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "address",
-		"jsonName": "address",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "foursquareId",
-		"jsonName": "foursquare_id",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "thumbWidth",
-		"jsonName": "thumb_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbHeight",
-		"jsonName": "thumb_height",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultVenue",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "phoneNumber",
-		"jsonName": "phone_number",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "firstName",
-		"jsonName": "first_name",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "lastName",
-		"jsonName": "last_name",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "thumbUrl",
-		"jsonName": "thumb_url",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "thumbWidth",
-		"jsonName": "thumb_width",
-		"type": "int",
-		"required": "false"
-	}, {
-		"cppName": "thumbHeight",
-		"jsonName": "thumb_height",
-		"type": "int",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultContact",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "photoFileId",
-		"jsonName": "photo_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "description",
-		"jsonName": "description",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedPhoto",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "gifFileId",
-		"jsonName": "gif_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedGif",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "mpeg4FileId",
-		"jsonName": "mpeg4_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedMpeg4Gif",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "stickerFileId",
-		"jsonName": "sticker_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedSticker",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "documentFileId",
-		"jsonName": "document_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "description",
-		"jsonName": "description",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedDocument",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "videoFileId",
-		"jsonName": "video_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "description",
-		"jsonName": "description",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedVideo",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "voiceFileId",
-		"jsonName": "voice_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedVoice",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "audioFileId",
-		"jsonName": "audio_file_id",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "caption",
-		"jsonName": "caption",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "replyMarkup",
-		"jsonName": "reply_markup",
-		"type": "InlineKeyboardMarkup",
-		"required": "false"
-	}, {
-		"cppName": "inputMessageContent",
-		"jsonName": "input_message_content",
-		"type": "InputMessageContent",
-		"required": "false"
-	}],
-	"name": "InlineQueryResultCachedAudio",
-	"transient": "true"
-}, {
-	"fields": [{
-		"cppName": "text",
-		"type": "InputTextMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "location",
-		"type": "InputLocationMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "venue",
-		"type": "InputVenueMessageContent",
-		"required": "false"
-	}, {
-		"cppName": "contact",
-		"type": "InputContactMessageContent",
-		"required": "false"
-	}],
-	"name": "InputMessageContent"
-}, {
-	"fields": [{
-		"cppName": "messageText",
-		"jsonName": "message_text",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "parseMode",
-		"jsonName": "parse_mode",
-		"type": "std::string",
-		"required": "false"
-	}, {
-		"cppName": "disableWebPagePreview",
-		"jsonName": "disable_web_page_preview",
-		"type": "bool",
-		"required": "false"
-	}],
-	"name": "InputTextMessageContent",
-    "transient": "true"
-}, {
-	"fields": [{
-		"cppName": "latitude",
-		"jsonName": "latitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "longitude",
-		"jsonName": "longitude",
-		"type": "float",
-		"required": "true"
-	}],
-	"name": "InputLocationMessageContent",
-    "transient": "true"
-}, {
-	"fields": [{
-		"cppName": "latitude",
-		"jsonName": "latitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "longitude",
-		"jsonName": "longitude",
-		"type": "float",
-		"required": "true"
-	}, {
-		"cppName": "title",
-		"jsonName": "title",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "address",
-		"jsonName": "address",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "foursquareId",
-		"jsonName": "foursquare_id",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "InputVenueMessageContent",
-    "transient": "true"
-}, {
-	"fields": [{
-		"cppName": "phoneNumber",
-		"jsonName": "phone_number",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "firstName",
-		"jsonName": "first_name",
-		"type": "std::string",
-		"required": "true"
-	}, {
-		"cppName": "lastName",
-		"jsonName": "last_name",
-		"type": "std::string",
-		"required": "false"
-	}],
-	"name": "InputContactMessageContent",
-    "transient": "true"
-}]
+{
+    "name": "Telegram",
+    "global_includes": [
+        "string",
+        "vector"
+    ],
+    "namespace": "telegram::structures",
+    "structures": [
+        {
+            "fields": [
+                {
+                    "name": "updateId",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "message",
+                    "type": "Message"
+                },
+                {
+                    "name": "editedMessage",
+                    "type": "Message"
+                },
+                {
+                    "name": "inlineQuery",
+                    "type": "InlineQuery"
+                },
+                {
+                    "name": "chosenInlineResult",
+                    "type": "ChosenInlineResult"
+                },
+                {
+                    "name": "callbackQuery",
+                    "type": "CallbackQuery"
+                }
+            ],
+            "name": "Update"
+        },
+        {
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "lastName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "userName",
+                    "type": "std::string"
+                }
+            ],
+            "name": "User"
+        },
+        {
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "type",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "userName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "firstName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "lastName",
+                    "type": "std::string"
+                }
+            ],
+            "name": "Chat"
+        },
+        {
+            "fields": [
+                {
+                    "name": "messageId",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "from",
+                    "type": "User"
+                },
+                {
+                    "name": "date",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "chat",
+                    "type": "Chat",
+                    "required": true
+                },
+                {
+                    "name": "forwardFrom",
+                    "type": "User"
+                },
+                {
+                    "name": "forwardFromChat",
+                    "type": "Chat"
+                },
+                {
+                    "name": "forwardDate",
+                    "type": "int"
+                },
+                {
+                    "name": "replyToMessage",
+                    "type": "Message"
+                },
+                {
+                    "name": "editDate",
+                    "type": "int"
+                },
+                {
+                    "name": "text",
+                    "type": "std::string"
+                },
+                {
+                    "name": "entities",
+                    "type": "std::vector<MessageEntity>"
+                },
+                {
+                    "name": "audio",
+                    "type": "Audio"
+                },
+                {
+                    "name": "document",
+                    "type": "Document"
+                },
+                {
+                    "name": "photo",
+                    "type": "std::vector<PhotoSize>"
+                },
+                {
+                    "name": "sticker",
+                    "type": "Sticker"
+                },
+                {
+                    "name": "video",
+                    "type": "Video"
+                },
+                {
+                    "name": "voice",
+                    "type": "Voice"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "contact",
+                    "type": "Contact"
+                },
+                {
+                    "name": "location",
+                    "type": "Location"
+                },
+                {
+                    "name": "venue",
+                    "type": "Venue"
+                },
+                {
+                    "name": "newChatMember",
+                    "type": "User"
+                },
+                {
+                    "name": "leftChatMember",
+                    "type": "User"
+                },
+                {
+                    "name": "newChatTitle",
+                    "type": "std::string"
+                },
+                {
+                    "name": "newChatPhoto",
+                    "type": "std::vector<PhotoSize>"
+                },
+                {
+                    "name": "deleteChatPhoto",
+                    "type": "bool"
+                },
+                {
+                    "name": "groupChatCreated",
+                    "type": "bool"
+                },
+                {
+                    "name": "superGroupChatCreated",
+                    "type": "bool"
+                },
+                {
+                    "name": "channelChatCreated",
+                    "type": "bool"
+                },
+                {
+                    "name": "migrateToChatId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "migrateFromChatId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "pinnedMessage",
+                    "type": "Message"
+                }
+            ],
+            "name": "Message"
+        },
+        {
+            "fields": [
+                {
+                    "name": "type",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "offset",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "length",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "type": "std::string"
+                },
+                {
+                    "name": "user",
+                    "type": "User"
+                }
+            ],
+            "name": "MessageEntity"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "width",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "height",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                }
+            ],
+            "name": "PhotoSize"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "duration",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "performer",
+                    "type": "std::string"
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "mimeType",
+                    "type": "std::string"
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                }
+            ],
+            "name": "Audio"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "thumb",
+                    "type": "PhotoSize"
+                },
+                {
+                    "name": "fileName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "mimeType",
+                    "type": "std::string"
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                }
+            ],
+            "name": "Document"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "width",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "height",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "thumb",
+                    "type": "PhotoSize"
+                },
+                {
+                    "name": "emoji",
+                    "type": "std::string"
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                }
+            ],
+            "name": "Sticker"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "width",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "height",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "duration",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "thumb",
+                    "type": "PhotoSize"
+                },
+                {
+                    "name": "mimeType",
+                    "type": "std::string"
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                }
+            ],
+            "name": "Video"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "duration",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "mimeType",
+                    "type": "std::string"
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                }
+            ],
+            "name": "Voice"
+        },
+        {
+            "fields": [
+                {
+                    "name": "phoneNumber",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "lastName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "userId",
+                    "type": "int"
+                }
+            ],
+            "name": "Contact"
+        },
+        {
+            "fields": [
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                }
+            ],
+            "name": "Location"
+        },
+        {
+            "fields": [
+                {
+                    "name": "location",
+                    "type": "Location",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "foursquareId",
+                    "type": "std::string"
+                }
+            ],
+            "name": "Venue"
+        },
+        {
+            "fields": [
+                {
+                    "name": "totalCount",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "photos",
+                    "type": "std::vector<std::vector<PhotoSize>>",
+                    "required": true
+                }
+            ],
+            "name": "UserProfilePhotos"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "fileSize",
+                    "type": "int"
+                },
+                {
+                    "name": "filePath",
+                    "type": "std::string"
+                }
+            ],
+            "name": "File"
+        },
+        {
+            "fields": [
+                {
+                    "name": "keyboard",
+                    "type": "std::vector<std::vector<KeyboardButton>>",
+                    "required": true
+                },
+                {
+                    "name": "resizeKeyboard",
+                    "type": "bool"
+                },
+                {
+                    "name": "oneTimeKeyboard",
+                    "type": "bool"
+                },
+                {
+                    "name": "selective",
+                    "type": "bool"
+                }
+            ],
+            "name": "ReplyKeyboardMarkup"
+        },
+        {
+            "fields": [
+                {
+                    "name": "text",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "requestContact",
+                    "type": "bool"
+                },
+                {
+                    "name": "requestLocation",
+                    "type": "bool"
+                }
+            ],
+            "name": "KeyboardButton"
+        },
+        {
+            "fields": [
+                {
+                    "name": "hideKeyboard",
+                    "type": "bool",
+                    "required": true
+                },
+                {
+                    "name": "selective",
+                    "type": "bool"
+                }
+            ],
+            "name": "ReplyKeyboardHide"
+        },
+        {
+            "fields": [
+                {
+                    "name": "inlineKeyboard",
+                    "type": "std::vector<std::vector<InlineKeyboardButton>>",
+                    "required": true
+                }
+            ],
+            "name": "InlineKeyboardMarkup"
+        },
+        {
+            "fields": [
+                {
+                    "name": "text",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "url",
+                    "type": "std::string"
+                },
+                {
+                    "name": "callbackData",
+                    "type": "std::string"
+                },
+                {
+                    "name": "switchInlineQuery",
+                    "type": "std::string"
+                }
+            ],
+            "name": "InlineKeyboardButton"
+        },
+        {
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "from",
+                    "type": "User",
+                    "required": true
+                },
+                {
+                    "name": "message",
+                    "type": "Message"
+                },
+                {
+                    "name": "inlineMessageId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "data",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "CallbackQuery"
+        },
+        {
+            "fields": [
+                {
+                    "name": "forceReply",
+                    "type": "bool",
+                    "required": true
+                },
+                {
+                    "name": "selective",
+                    "type": "bool"
+                }
+            ],
+            "name": "ForceReply"
+        },
+        {
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "User",
+                    "required": true
+                },
+                {
+                    "name": "status",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "ChatMember"
+        },
+        {
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "from",
+                    "type": "User",
+                    "required": true
+                },
+                {
+                    "name": "location",
+                    "type": "Location"
+                },
+                {
+                    "name": "query",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "offset",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "InlineQuery"
+        },
+        {
+            "fields": [
+                {
+                    "name": "resultId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "from",
+                    "type": "User",
+                    "required": true
+                },
+                {
+                    "name": "location",
+                    "type": "Location"
+                },
+                {
+                    "name": "inlineMessageId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "query",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "ChosenInlineResult"
+        },
+        {
+            "fields": [
+                {
+                    "name": "type",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "id",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "article",
+                    "type": "InlineQueryResultArticle"
+                },
+                {
+                    "name": "photo",
+                    "type": "InlineQueryResultPhoto"
+                },
+                {
+                    "name": "gif",
+                    "type": "InlineQueryResultGif"
+                },
+                {
+                    "name": "mpeg4",
+                    "type": "InlineQueryResultMpeg4Gif"
+                },
+                {
+                    "name": "video",
+                    "type": "InlineQueryResultVideo"
+                },
+                {
+                    "name": "audio",
+                    "type": "InlineQueryResultAudio"
+                },
+                {
+                    "name": "voice",
+                    "type": "InlineQueryResultVoice"
+                },
+                {
+                    "name": "document",
+                    "type": "InlineQueryResultDocument"
+                },
+                {
+                    "name": "location",
+                    "type": "InlineQueryResultLocation"
+                },
+                {
+                    "name": "venue",
+                    "type": "InlineQueryResultVenue"
+                },
+                {
+                    "name": "contact",
+                    "type": "InlineQueryResultContact"
+                },
+                {
+                    "name": "cachedPhoto",
+                    "type": "InlineQueryResultCachedPhoto"
+                },
+                {
+                    "name": "cachedGif",
+                    "type": "InlineQueryResultCachedGif"
+                },
+                {
+                    "name": "cachedMpeg4",
+                    "type": "InlineQueryResultCachedMpeg4Gif"
+                },
+                {
+                    "name": "cachedSticker",
+                    "type": "InlineQueryResultCachedSticker"
+                },
+                {
+                    "name": "cachedDocument",
+                    "type": "InlineQueryResultCachedDocument"
+                },
+                {
+                    "name": "cachedVideo",
+                    "type": "InlineQueryResultCachedVideo"
+                },
+                {
+                    "name": "cachedVoice",
+                    "type": "InlineQueryResultCachedVoice"
+                },
+                {
+                    "name": "cachedAudio",
+                    "type": "InlineQueryResultCachedAudio"
+                }
+            ],
+            "name": "InlineQueryResult"
+        },
+        {
+            "fields": [
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent",
+                    "required": true
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "url",
+                    "type": "std::string"
+                },
+                {
+                    "name": "hideUrl",
+                    "type": "bool"
+                },
+                {
+                    "name": "description",
+                    "type": "std::string"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string"
+                },
+                {
+                    "name": "thumbWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbHeight",
+                    "type": "int"
+                }
+            ],
+            "name": "InlineQueryResultArticle",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "photoUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "photoWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "photoHeight",
+                    "type": "int"
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultPhoto",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "gifUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "gifWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "gifHeight",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultGif",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "mpeg4Url",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "mpeg4Width",
+                    "type": "int"
+                },
+                {
+                    "name": "mpeg4Height",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultMpeg4Gif",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "videoUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "mimeType",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "videoWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "videoHeight",
+                    "type": "int"
+                },
+                {
+                    "name": "videoDuration",
+                    "type": "int"
+                },
+                {
+                    "name": "description",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultVideo",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "audioUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "performer",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultAudio",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "voiceUrl",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "voiceDuration",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultVoice",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "document_url",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "mime_type",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string"
+                },
+                {
+                    "name": "thumbWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbHeight",
+                    "type": "int"
+                }
+            ],
+            "name": "InlineQueryResultDocument",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string"
+                },
+                {
+                    "name": "thumbWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbHeight",
+                    "type": "int"
+                }
+            ],
+            "name": "InlineQueryResultLocation",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "foursquareId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string"
+                },
+                {
+                    "name": "thumbWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbHeight",
+                    "type": "int"
+                }
+            ],
+            "name": "InlineQueryResultVenue",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "phoneNumber",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "lastName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                },
+                {
+                    "name": "thumbUrl",
+                    "type": "std::string"
+                },
+                {
+                    "name": "thumbWidth",
+                    "type": "int"
+                },
+                {
+                    "name": "thumbHeight",
+                    "type": "int"
+                }
+            ],
+            "name": "InlineQueryResultContact",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "photoFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "description",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedPhoto",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "gifFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedGif",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "mpeg4FileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedMpeg4Gif",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "stickerFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedSticker",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "documentFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedDocument",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "videoFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "description",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedVideo",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "voiceFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedVoice",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "audioFileId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "InlineKeyboardMarkup"
+                },
+                {
+                    "name": "inputMessageContent",
+                    "type": "InputMessageContent"
+                }
+            ],
+            "name": "InlineQueryResultCachedAudio",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "text",
+                    "type": "InputTextMessageContent"
+                },
+                {
+                    "name": "location",
+                    "type": "InputLocationMessageContent"
+                },
+                {
+                    "name": "venue",
+                    "type": "InputVenueMessageContent"
+                },
+                {
+                    "name": "contact",
+                    "type": "InputContactMessageContent"
+                }
+            ],
+            "name": "InputMessageContent"
+        },
+        {
+            "fields": [
+                {
+                    "name": "messageText",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "parseMode",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableWebPagePreview",
+                    "type": "bool"
+                }
+            ],
+            "name": "InputTextMessageContent",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                }
+            ],
+            "name": "InputLocationMessageContent",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "foursquareId",
+                    "type": "std::string"
+                }
+            ],
+            "name": "InputVenueMessageContent",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "phoneNumber",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "lastName",
+                    "type": "std::string"
+                }
+            ],
+            "name": "InputContactMessageContent",
+            "transient": true
+        }
+    ]
+}

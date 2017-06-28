@@ -1,7 +1,8 @@
 #ifndef GENERAL_CALLBACK_H_
 #define GENERAL_CALLBACK_H_
 
-#include "structures.h"
+#include "RequestConverter.h"
+
 
 namespace telegram
 {

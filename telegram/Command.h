@@ -1,8 +1,11 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
-#include "jsonserializer/StructConverter.h"
-#include "structures.h"
+#include "StructConverter.h"
+#include "TelegramStructures.h"
+#include "RequestStructures.h"
+#include "TelegramConverter.h"
+#include "RequestConverter.h"
 
 #include "CommandException.h"
 

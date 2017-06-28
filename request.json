@@ -1,0 +1,676 @@
+{
+    "name": "Request",
+    "local_includes": [
+        "TelegramStructures.h"
+    ],
+    "namespace": "telegram::request",
+    "structures": [
+        {
+            "fields": [
+                {
+                    "name": "inlineKeyboard",
+                    "type": "telegram::structures::InlineKeyboardMarkup"
+                },
+                {
+                    "name": "replyKeyboardMarkup",
+                    "type": "telegram::structures::ReplyKeyboardMarkup"
+                },
+                {
+                    "name": "replyKeyboardHide",
+                    "type": "telegram::structures::ReplyKeyboardHide"
+                },
+                {
+                    "name": "forceReply",
+                    "type": "telegram::structures::ForceReply"
+                }
+            ],
+            "name": "ReplyMarkup",
+            "transient": true
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "parseMode",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableWebPagePreview",
+                    "type": "bool"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendMessageParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "fromChatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "messageId",
+                    "type": "int",
+                    "required": true
+                }
+            ],
+            "name": "ForwardMessageParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "photo",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendPhotoParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "audio",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "duration",
+                    "type": "int"
+                },
+                {
+                    "name": "performer",
+                    "type": "std::string"
+                },
+                {
+                    "name": "title",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendAudioParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "document",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendDocumentParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "sticker",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendStickerParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "video",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "duration",
+                    "type": "int"
+                },
+                {
+                    "name": "width",
+                    "type": "int"
+                },
+                {
+                    "name": "height",
+                    "type": "int"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendVideoParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "voice",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "duration",
+                    "type": "int"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendVoiceParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendLocationParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "latitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "longitude",
+                    "type": "float",
+                    "required": true
+                },
+                {
+                    "name": "title",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "address",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "foursquareId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendVenueParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "phoneNumber",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "firstName",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "lastName",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableNotification",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyToMessageId",
+                    "type": "int"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "ReplyMarkup"
+                }
+            ],
+            "name": "SendContactParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "action",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "SendChatActionParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "userId",
+                    "type": "int",
+                    "required": true
+                },
+                {
+                    "name": "offset",
+                    "type": "int"
+                },
+                {
+                    "name": "limit",
+                    "type": "int"
+                }
+            ],
+            "name": "GetUserProfilePhotosParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "fileId",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "GetFileParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "int",
+                    "required": true
+                }
+            ],
+            "name": "KickChatMemberParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "LeaveChatParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "int",
+                    "required": true
+                }
+            ],
+            "name": "UnbanChatMemberParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "GetChatParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "GetChatAdministratorsParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                }
+            ],
+            "name": "GetChatMembersCountParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "userId",
+                    "type": "int",
+                    "required": true
+                }
+            ],
+            "name": "GetChatMemberParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "callbackQueryId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "std::string"
+                },
+                {
+                    "name": "showAlert",
+                    "type": "bool"
+                }
+            ],
+            "name": "AnswerCallbackQueryParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "messageId",
+                    "type": "int"
+                },
+                {
+                    "name": "inlineMessageId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "text",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "parseMode",
+                    "type": "std::string"
+                },
+                {
+                    "name": "disableWebPagePreview",
+                    "type": "bool"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "telegram::structures::InlineKeyboardMarkup"
+                }
+            ],
+            "name": "EditMessageTextParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "messageId",
+                    "type": "int"
+                },
+                {
+                    "name": "inlineMessageId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "caption",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "telegram::structures::InlineKeyboardMarkup"
+                }
+            ],
+            "name": "EditMessageCaptionParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "chatId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "messageId",
+                    "type": "int"
+                },
+                {
+                    "name": "inlineMessageId",
+                    "type": "std::string"
+                },
+                {
+                    "name": "replyMarkup",
+                    "type": "telegram::structures::InlineKeyboardMarkup"
+                }
+            ],
+            "name": "EditMessageReplyMarkupParams"
+        },
+        {
+            "fields": [
+                {
+                    "name": "inlineQueryId",
+                    "type": "std::string",
+                    "required": true
+                },
+                {
+                    "name": "results",
+                    "type": "std::vector<telegram::structures::InlineQueryResult>",
+                    "required": true
+                },
+                {
+                    "name": "cacheTime",
+                    "type": "int"
+                },
+                {
+                    "name": "isPersonal",
+                    "type": "bool"
+                },
+                {
+                    "name": "nextOffset",
+                    "type": "std::string"
+                },
+                {
+                    "name": "switchPmText",
+                    "type": "std::string"
+                },
+                {
+                    "name": "switchPmParameter",
+                    "type": "std::string"
+                }
+            ],
+            "name": "AnswerInlineQueryParams"
+        }
+    ]
+}

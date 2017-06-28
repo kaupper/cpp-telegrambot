@@ -58,7 +58,7 @@ bool CommandSet::Process(telegram::structures::Update &update)
                 // commands like /<cmd>@<botname> must be filtered by us
                 if(cmd != "" && 
                     (atPosition = cmd.find("@")) != std::string::npos && 
-                    cmd.substr(atPosition + 1) != bot.Get("botName").asString()) {
+                    cmd.substr(atPosition + 1) != bot.Get("botName").get<std::string>()) {
                     Logger::warn << "Command \"" << cmd << "\" addresses another bot!" << std::endl;
                     continue;
                 }

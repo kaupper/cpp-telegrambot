@@ -5,7 +5,8 @@
 #include <string>
 #include <map>
 
-#include "structures.h"
+#include "StructConverter.h"
+#include "RequestConverter.h"
 
 namespace telegram
 {
