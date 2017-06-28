@@ -215,6 +215,9 @@ inline std::string to_string(const json &j)
         case json::value_t::number_integer:
             return std::to_string(j.get<long>());
             
+        case json::value_t::number_unsigned:
+            return std::to_string(j.get<unsigned long>());
+            
         case json::value_t::number_float:
             return std::to_string(j.get<double>());
             
