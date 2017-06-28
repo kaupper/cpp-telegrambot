@@ -36,4 +36,4 @@ include_directories(${PROJECT_SOURCE_DIR}/telegram ${PROJECT_SOURCE_DIR} ${JSON_
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 target_link_libraries(${PROJECT_NAME} LINK_PUBLIC "curlsession" "pthread")
-target_include_directories (${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
+target_include_directories (${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR} ${JSON_INCLUDE_DIR})
