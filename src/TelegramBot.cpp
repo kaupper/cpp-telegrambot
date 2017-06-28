@@ -129,8 +129,10 @@ void TelegramBot::GetUpdates()
                     senderId);
         }
         
-        if (u.GetUpdateIdValue() >= (*this)["offset"].get<int>()) {
-            (*this)["offset"] = u.GetUpdateIdValue() + 1;
+        auto &offset = (*this)["offset"];
+        
+        if (offset.is_null() || u.GetUpdateIdValue() >= offset.get<int>()) {
+            offset = u.GetUpdateIdValue() + 1;
         }
     }
     
