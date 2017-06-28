@@ -17,9 +17,7 @@ macro(add_external name repo)
     add_subdirectory(${PROJECT_BINARY_DIR}/${name} ${PROJECT_BINARY_DIR}/${name}/build)
 endmacro(add_external)
 
-
-set(JSON_CONFIGURATION_FILES request.json telegram.json)
-set(JSON_OUTPUT_DIR generated/)
+set(JSON_CONFIGURATION_FILES ${PROJECT_SOURCE_DIR}/request.json ${PROJECT_SOURCE_DIR}/telegram.json)
 add_external("jsonserializer" "https://github.com/skaupper/cpp-jsonserializer.git")
 add_external("curlsession" "https://github.com/skaupper/cpp-curlsession.git")
 
