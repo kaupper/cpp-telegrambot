@@ -2,7 +2,7 @@
 #define HIDE_COMMAND_H_
 
 #include "telegram/Command.h"
-#include "RequestConverter.h"
+#include "jsonserializer/RequestConverter.h"
 
 
 class HideCommand : public telegram::Command

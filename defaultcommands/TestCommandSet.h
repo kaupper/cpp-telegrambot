@@ -7,13 +7,14 @@
 #include "ExitCommand.h"
 
 class TestCommandSet : public telegram::CommandSet
-{ 
-public:
-    TestCommandSet(telegram::TelegramBot &bot) : telegram::CommandSet(bot) {
-        RegisterCommand<PingCommand>(bot, "/ping");
-        RegisterCommand<ExitCommand>(bot, "/exit");
-        RegisterCommand<HideCommand>(bot, "/hide");
-    }
+{
+    public:
+        TestCommandSet(telegram::TelegramBot &bot) : telegram::CommandSet(bot)
+        {
+            RegisterCommand<PingCommand>(bot, "/ping");
+            RegisterCommand<ExitCommand>(bot, "/exit");
+            RegisterCommand<HideCommand>(bot, "/hide");
+        }
 };
 
 #endif // TEST_COMMAND_SET_H_
