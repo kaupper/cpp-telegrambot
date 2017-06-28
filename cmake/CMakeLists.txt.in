@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 2.8.2)
  
 project(${EXTERNAL_NAME} NONE)
- 
+
 include(ExternalProject)
 ExternalProject_Add(${EXTERNAL_NAME}
   GIT_REPOSITORY    ${EXTERNAL_GIT_REPOSITORY}
   SOURCE_DIR        "${PROJECT_BINARY_DIR}/${EXTERNAL_NAME}"
-  BINARY_DIR        "${PROJECT_BINARY_DIR}/${EXTERNAL_NAME}/build"
   CONFIGURE_COMMAND ""
   BUILD_COMMAND     ""
   INSTALL_COMMAND   ""
