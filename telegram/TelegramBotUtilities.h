@@ -1,7 +1,7 @@
 #ifndef TELEGRAM_BOT_UTILITIES_H_
 #define TELEGRAM_BOT_UTILITIES_H_
 
-#include "RequestConverter.h"
+#include "jsonserializer/RequestConverter.h"
 
 
 namespace telegram

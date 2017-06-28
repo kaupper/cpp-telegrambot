@@ -7,7 +7,8 @@
 #include <vector>
 #include <sys/stat.h>
 
-#include "RequestConverter.h"
+#include "jsonserializer/StructConverter.h"
+#include "jsonserializer/RequestConverter.h"
 
 // #include "jsonserializer/PersistingService.h"
 #include "curlsession/CurlSession.h"
@@ -223,7 +224,7 @@ inline std::string to_string(const json &j)
         case json::value_t::object:
         case json::value_t::array:
         default:
-            throw "Object, array or something else";
+            telegram::Logger::error << "Object, array or something else" << std::endl;;
     }
 }
 

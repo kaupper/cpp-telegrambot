@@ -22,7 +22,6 @@ add_external("jsonserializer" "https://github.com/skaupper/cpp-jsonserializer.gi
 add_external("curlsession" "https://github.com/skaupper/cpp-curlsession.git")
 
 set(SOURCES
-${JSON_SOURCES}
 ${PROJECT_SOURCE_DIR}/src/Command.cpp
 ${PROJECT_SOURCE_DIR}/src/CommandSet.cpp
 ${PROJECT_SOURCE_DIR}/src/Logger.cpp
@@ -32,8 +31,7 @@ ${PROJECT_SOURCE_DIR}/src/TelegramBotMethods.cpp
 ${PROJECT_SOURCE_DIR}/src/UpdateQueue.cpp
 )
 
-include_directories(${PROJECT_SOURCE_DIR}/telegram ${PROJECT_SOURCE_DIR} ${JSON_INCLUDE_DIR})
-
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
-target_link_libraries(${PROJECT_NAME} LINK_PUBLIC "curlsession" "pthread")
-target_include_directories (${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR} ${JSON_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} LINK_PUBLIC "curlsession" "pthread" "jsonserializer")
+target_include_directories (${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
+target_include_directories (${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/telegram)

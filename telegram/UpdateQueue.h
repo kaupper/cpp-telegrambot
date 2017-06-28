@@ -5,21 +5,21 @@
 #include <string>
 #include <map>
 
-#include "StructConverter.h"
-#include "RequestConverter.h"
+#include "jsonserializer/RequestConverter.h"
+
 
 namespace telegram
 {
     class UpdateQueue
     {
-    private:
-        std::map<std::string, std::vector<telegram::structures::Update>> queue;
-        std::mutex queueMutex;
-        
-    public:
-        bool Available(std::string senderId);
-        telegram::structures::Update Pop(std::string senderId);
-        void Push(std::string senderId, telegram::structures::Update &update);
+        private:
+            std::map<std::string, std::vector<telegram::structures::Update>> queue;
+            std::mutex queueMutex;
+            
+        public:
+            bool Available(std::string senderId);
+            telegram::structures::Update Pop(std::string senderId);
+            void Push(std::string senderId, telegram::structures::Update &update);
     };
 }
 
