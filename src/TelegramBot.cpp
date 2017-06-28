@@ -48,7 +48,7 @@ void TelegramBot::Setup(std::string token, std::string configPath,
     
     try {
         json j = json::parse(response.content);
-        std::string botName = j["result"]["username"].get<std::string>();
+        std::string botName = to_string(j["result"]["username"]);
         Logger::debug << "botName: " << botName << std::endl;
         (*this)["botName"] = botName;
     } catch (const parse_error &ex) {
@@ -88,7 +88,7 @@ void TelegramBot::GetUpdates()
     
     if (!(*this)["offset"].is_null()) {
         params = {
-            {"offset", (*this)["offset"].get<std::string>()}
+            {"offset", to_string((*this)["offset"])}
         };
     }
     
@@ -254,7 +254,7 @@ bool TelegramBot::CheckResponse(curl::Response &response,
     bool ok = j["ok"].get<bool>();
     
     if (!ok) {
-        std::string description = j["description"].get<std::string>();
+        std::string description = to_string(j["description"]);
         
         if (methodName != "") {
             Logger::warn << "Call to " << methodName << " failed" << std::endl;
@@ -263,7 +263,7 @@ bool TelegramBot::CheckResponse(curl::Response &response,
         }
         
         Logger::warn << "Reason: " << description << std::endl;
-        Logger::warn << "Code: " << j["error_code"].get<std::string>() << std::endl;
+        Logger::warn << "Code: " << to_string(j["error_code"]) << std::endl;
         Logger::warn << "Result: " << std::string(response.content.begin(),
                      response.content.end()) << std::endl;
     }
@@ -274,7 +274,7 @@ bool TelegramBot::CheckResponse(curl::Response &response,
 void TelegramBot::DownloadFile(const std::string &fileId)
 {
     std::string url = "https://api.telegram.org/file/bot" +
-                      (*this)["token"].get<std::string>() + "/";
+                      to_string((*this)["token"]) + "/";
     auto file = GetFile({ fileId });
     auto response = session.DoRequest({ url + file.GetFilePathValue() });
     std::string statusLine = response.GetHeader("statusLine");
@@ -285,7 +285,7 @@ void TelegramBot::DownloadFile(const std::string &fileId)
         std::string extension = file.GetFilePathValue();
         extension = extension.substr(extension.find("."));
         std::string fileName = file.GetFileIdValue() + extension;
-        std::string path = (*this)["filePath"].get<std::string>();
+        std::string path = to_string((*this)["filePath"]);
         std::ofstream fsFile(path + fileName);
         
         if (!fsFile.is_open()) {

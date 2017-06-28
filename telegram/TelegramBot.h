@@ -202,4 +202,29 @@ namespace telegram
     };
 }
 
+inline std::string to_string(const json &j)
+{
+    switch (j.type()) {
+        case json::value_t::null:
+            return "null";
+            
+        case json::value_t::boolean:
+            return std::to_string(j.get<bool>());
+            
+        case json::value_t::number_integer:
+            return std::to_string(j.get<long>());
+            
+        case json::value_t::number_float:
+            return std::to_string(j.get<double>());
+            
+        case json::value_t::string:
+            return j.get<std::string>();
+            
+        case json::value_t::object:
+        case json::value_t::array:
+        default:
+            throw "Object, array or something else";
+    }
+}
+
 #endif // TELEGRAM_BOT_H_
