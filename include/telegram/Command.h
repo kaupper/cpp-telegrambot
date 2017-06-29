@@ -33,7 +33,7 @@ namespace telegram
             CommandSet *parent;
 
         protected:
-            TelegramBot &bot;
+            TelegramBot *bot;
 
             bool HasParent()
             {
@@ -42,7 +42,7 @@ namespace telegram
             const std::vector<Command *> &GetParentCommands() const;
 
         public:
-            Command(TelegramBot &bot, const std::string &name,
+            Command(TelegramBot *bot, const std::string &name,
                     CommandSet *parent = nullptr) : name(name), parent(parent), bot(bot) { }
             virtual ~Command() { }
 

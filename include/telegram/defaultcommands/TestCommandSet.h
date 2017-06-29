@@ -9,7 +9,7 @@
 class TestCommandSet : public telegram::CommandSet
 {
     public:
-        TestCommandSet(telegram::TelegramBot &bot) : telegram::CommandSet(bot)
+        TestCommandSet(telegram::TelegramBot *bot) : telegram::CommandSet(bot)
         {
             RegisterCommand<PingCommand>(bot, "/ping");
             RegisterCommand<ExitCommand>(bot, "/exit");

@@ -6,13 +6,13 @@
 class ExitCommand : public telegram::Command
 {
     public:
-        ExitCommand(telegram::TelegramBot &bot, std::string name,
+        ExitCommand(telegram::TelegramBot *bot, std::string name,
                     telegram::CommandSet *cs) : telegram::Command(bot, name, cs) { }
-                    
+
         virtual bool OnDirect(telegram::structures::Update &update)
         {
             (void) update;
-            bot.Get("running") = false;
+            bot->Set(false, "running");
             return false;
         }
 };
