@@ -60,7 +60,7 @@ namespace telegram
 
             virtual void Setup() { }
 
-            virtual bool OnDirect(const telegram::structures::Update &)
+            virtual bool OnDirect(telegram::structures::Update &)
             {
                 throw CommandException("Method OnDirect is not implemented!");
             }
