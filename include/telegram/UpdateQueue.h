@@ -15,11 +15,11 @@ namespace telegram
         private:
             std::map<std::string, std::vector<telegram::structures::Update>> queue;
             std::mutex queueMutex;
-            
+
         public:
-            bool Available(std::string senderId);
-            telegram::structures::Update Pop(std::string senderId);
-            void Push(std::string senderId, telegram::structures::Update &update);
+            bool Available(const std::string &senderId);
+            telegram::structures::Update Pop(const std::string &senderId);
+            void Push(const std::string &senderId, const telegram::structures::Update &update);
     };
 }
 

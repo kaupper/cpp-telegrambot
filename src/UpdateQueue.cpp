@@ -2,15 +2,15 @@
 
 using namespace telegram;
 
-bool UpdateQueue::Available(std::string senderId) 
+bool UpdateQueue::Available(const std::string &senderId)
 {
     queueMutex.lock();
     unsigned long availables = queue[senderId].size();
     queueMutex.unlock();
-    return availables > 0; 
+    return availables > 0;
 }
 
-telegram::structures::Update UpdateQueue::Pop(std::string senderId)
+telegram::structures::Update UpdateQueue::Pop(const std::string &senderId)
 {
     queueMutex.lock();
     telegram::structures::Update update = queue[senderId].back();
@@ -19,7 +19,7 @@ telegram::structures::Update UpdateQueue::Pop(std::string senderId)
     return update;
 }
 
-void UpdateQueue::Push(std::string senderId, telegram::structures::Update &update)
+void UpdateQueue::Push(const std::string &senderId, const telegram::structures::Update &update)
 {
     queueMutex.lock();
     queue[senderId].push_back(update);

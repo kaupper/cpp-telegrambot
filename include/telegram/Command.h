@@ -13,7 +13,7 @@ namespace telegram
         INDIRECT = 2,
         QUIT = 4
     };
-    
+
     enum class CallReason {
         NOTHING = 0,
         MESSAGE = 1,
@@ -23,7 +23,7 @@ namespace telegram
         CALLBACK_QUERY = 16
                          // ...
     };
-    
+
     class TelegramBot;
     class CommandSet;
     class Command
@@ -31,42 +31,45 @@ namespace telegram
         private:
             std::string name;
             CommandSet *parent;
-            
+
         protected:
             TelegramBot &bot;
-            
+
             bool HasParent()
             {
                 return parent != nullptr;
             }
             const std::vector<Command *> &GetParentCommands() const;
-            
+
         public:
-            Command(TelegramBot &bot, std::string name,
+            Command(TelegramBot &bot, const std::string &name,
                     CommandSet *parent = nullptr) : name(name), parent(parent), bot(bot) { }
             virtual ~Command() { }
-            
-            void SetName(std::string n)
+
+            void SetName(const std::string &n)
             {
                 name = n;
             }
-            const std::string &GetName() const
+
+            std::string GetName() const
             {
                 return name;
             }
-            
+
             bool operator()(telegram::structures::Update &, CallReason, CallType);
-            
+
             virtual void Setup() { }
-            
-            virtual bool OnDirect(telegram::structures::Update &)
+
+            virtual bool OnDirect(const telegram::structures::Update &)
             {
                 throw CommandException("Method OnDirect is not implemented!");
             }
+
             virtual bool OnIndirect(telegram::structures::Update &)
             {
                 throw CommandException("Method OnIndirect is not implemented!");
             }
+
             virtual bool OnQuit(telegram::structures::Update &)
             {
                 throw CommandException("Method OnQuit is not implemented!");

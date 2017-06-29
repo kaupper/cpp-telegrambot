@@ -3,105 +3,112 @@
 using namespace telegram;
 using namespace telegram::structures;
 using namespace telegram::request;
+using namespace telegram::util;
 using namespace jsonserializer;
+using curlsession::Method;
+using curlsession::Request;
+using curlsession::RequestBuilder;
+using curlsession::Response;
 
-static json getResponse(const curl::Response &response,
+
+static json getResponse(const Response &response,
                         const std::string &method)
 {
     json responseJSON;
-    
+
     try {
         responseJSON = json::parse(response.content);
     } catch (const nlohmann::detail::parse_error &ex) {
-        throw TelegramException("Failed to deserialize " + method + " response!",
-                                response);
+        throw TelegramException("Failed to deserialize " + method + " response!", response);
     }
-    
+
     return responseJSON["result"];
 }
 
-curl::Response TelegramBot::DoMethod(const json &j, const std::string &method,
-                                     bool multipart, const std::string &fileKey)
+Response TelegramBot::DoMethod(const json &j, const std::string &method,
+                               bool multipart, const std::string &fileKey)
 {
-    curl::RequestParams requestParams(GetApiUrl(method), curl::Method::POST);
-    
+    RequestBuilder requestBuilder(GetApiUrl(method), Method::POST);
+
     if (!multipart) {
         if (fileKey != "") {
-            Logger::debug << "used cached file_id for file: " << to_string(
-                              j[fileKey]) << std::endl;
+            Logger::debug << "used cached file_id for file: " << ToString(j[fileKey]) << std::endl;
         }
-        
-        requestParams.SetParams(j);
+
+        requestBuilder.SetJSONParams(j);
     } else {
-        Logger::debug << "upload file: " << to_string(j[fileKey]) << std::endl;
-        requestParams.SetParams(j, {{ fileKey, to_string(j[fileKey]) }});
+        Logger::debug << "upload file: " << ToString(j[fileKey]) << std::endl;
+        requestBuilder.SetMultipartParams(j, {{ fileKey, ToString(j[fileKey]) }});
     }
-    
-    requestParams.SetHeaders(GetDefaultHeader());
-    curl::Response response = session.DoRequest(requestParams);
-    
+
+    requestBuilder.SetHeaders(GetDefaultHeader());
+    Response response = session.DoRequest(requestBuilder.GetRequest());
+
     if (!CheckResponse(response, method)) {
         throw TelegramException("Call to " + method + " failed!", response);
     }
-    
+
     return response;
 }
 
 void TelegramBot::CacheFile(const std::string &typeString,
                             const std::string &path, const std::string &id)
 {
-    auto &cache = (*this)["cache"][typeString][path];
+    auto cache = Get("cache", typeString, path);
     struct stat buffer;
-    
+
     if (stat(path.c_str(), &buffer) != 0) {
         // file does not exist
         throw TelegramException("File \"" + path + "\" does not exist!");
     }
-    
-    cache["mtime"] = std::to_string(buffer.st_mtime);
+
+    cache["mtime"] = static_cast<long>(buffer.st_mtime);
     cache["id"] = id;
+    Set(cache, "cache", typeString, path);
 }
 
 bool TelegramBot::IsCached(const std::string &typeString,
                            const std::string &path)
 {
-    auto &cache = (*this)["cache"][typeString][path];
-    
+    auto cache = Get("cache", typeString, path);
+
     if (cache.is_null()) {
         return false;
     }
-    
+
     // invalidate cache if file does not exist
     struct stat buffer;
-    
+
     if (stat(path.c_str(), &buffer) != 0) {
-        auto tmp = (*this)["cache"][typeString];
+        auto tmp = Get("cache", typeString);
         tmp.erase(tmp.find(path));
+        Set(tmp, "cache", typeString);
         return false;
     }
-    
+
     // invalidate cache if file's last modified date is different
     // than that one find in cache
-    if (std::stol(to_string(cache["mtime"])) != (long) buffer.st_mtime) {
-        auto tmp = (*this)["cache"][typeString];
+    if (cache["mtime"].get<long>() != (long) buffer.st_mtime) {
+        auto tmp = Get("cache", typeString);
         tmp.erase(tmp.find(path));
+        Set(tmp, "cache", typeString);
         return false;
     }
-    
+
     return true;
 }
 
 std::string TelegramBot::GetCached(const std::string &typeString,
                                    const std::string &path)
 {
-    return to_string((*this)["cache"][typeString][path]["id"]);
+    return GetString("cache", typeString, path, "id");
 }
 
 Message TelegramBot::SendFile(const json &params, const std::string &method,
                               const std::function<std::string(Message)> &idExtractor)
 {
     std::string typeString = "";
-    
+
     if (params.find("photo") != params.end()) {
         typeString = "photo";
     } else if (params.find("audio") != params.end()) {
@@ -115,23 +122,23 @@ Message TelegramBot::SendFile(const json &params, const std::string &method,
     } else if (params.find("voice") != params.end()) {
         typeString = "voice";
     }
-    
+
     json newParams = params;
-    std::string path = to_string(params[typeString]);
+    std::string path = ToString(params[typeString]);
     bool needUpload = true;
-    
+
     if (IsCached(typeString, path)) {
         needUpload = false;
         newParams[typeString] = GetCached(typeString, path);
     } else {
         struct stat buffer;
-        
+
         if (stat(path.c_str(), &buffer) != 0) {
             // file does not exist
             throw TelegramException("File \"" + path + "\" does not exist!");
         }
     }
-    
+
     auto response = DoMethod(newParams, method, needUpload, typeString);
     auto message = Converter::FromJSON<Message>(getResponse(response, method));
     std::string id = idExtractor(message);
@@ -258,7 +265,7 @@ Chat TelegramBot::GetChat(const request::GetChatParams &params)
 }
 
 std::vector<ChatMember> TelegramBot::GetChatAdministrators(
-    const request::GetChatAdministratorsParams &params)
+            const request::GetChatAdministratorsParams &params)
 {
     auto response = DoMethod(Converter::ToJSON(params), "GetChatAdministrators");
     return Converter::FromJSON<std::vector<ChatMember>>(getResponse(response,
@@ -292,7 +299,7 @@ Message TelegramBot::EditMessageText(const request::EditMessageTextParams
     if (params.inlineMessageId != nullptr) {
         throw TelegramException("Inline message id set. This is not allowed for normal message modifications!");
     }
-    
+
     auto response = DoMethod(Converter::ToJSON(params), "EditMessageText");
     return Converter::FromJSON<Message>(getResponse(response, "EditMessageText"));
 }
@@ -303,7 +310,7 @@ Message TelegramBot::EditMessageCaption(const request::EditMessageCaptionParams
     if (params.inlineMessageId != nullptr) {
         throw TelegramException("Inline message id set. This is not allowed for normal message modifications!");
     }
-    
+
     auto response = DoMethod(Converter::ToJSON(params), "EditMessageCaption");
     return Converter::FromJSON<Message>(getResponse(response,
                                         "EditMessageCaption"));
@@ -315,7 +322,7 @@ Message TelegramBot::EditMessageReplyMarkup(const
     if (params.inlineMessageId != nullptr) {
         throw TelegramException("Inline message id set. This is not allowed for normal message modifications!");
     }
-    
+
     auto response = DoMethod(Converter::ToJSON(params), "EditMessageReplyMarkup");
     return Converter::FromJSON<Message>(getResponse(response,
                                         "EditMessageReplyMarkup"));
@@ -327,7 +334,7 @@ bool TelegramBot::EditInlineMessageText(const request::EditMessageTextParams
     if (params.chatId != nullptr || params.messageId != nullptr) {
         throw TelegramException("Chat id or message id set. This is not allowed for inline message modifications!");
     }
-    
+
     auto response = DoMethod(Converter::ToJSON(params), "EditMessageText");
     return getResponse(response, "EditInlineMessageText").get<bool>();
 }
@@ -338,7 +345,7 @@ bool TelegramBot::EditInlineMessageCaption(const
     if (params.chatId != nullptr || params.messageId != nullptr) {
         throw TelegramException("Chat id or message id set. This is not allowed for inline message modifications!");
     }
-    
+
     auto response = DoMethod(Converter::ToJSON(params), "EditMessageCaption");
     return getResponse(response, "EditInlineMessageCaption").get<bool>();
 }
@@ -349,7 +356,7 @@ bool TelegramBot::EditInlineMessageReplyMarkup(const
     if (params.chatId != nullptr || params.messageId != nullptr) {
         throw TelegramException("Chat id or message id set. This is not allowed for inline message modifications!");
     }
-    
+
     auto response = DoMethod(Converter::ToJSON(params), "EditMessageReplyMarkup");
     return getResponse(response, "EditInlineMessageReplyMarkup").get<bool>();
 }
