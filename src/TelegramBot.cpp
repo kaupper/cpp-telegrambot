@@ -93,17 +93,17 @@ TelegramBot::TelegramBot(const std::string &token,
 
 void TelegramBot::GetUpdates()
 {
-    std::vector<Parameter> params;
+    json params;
 
     if (!Get("offset").is_null()) {
         params = {
-            {"offset", GetString("offset")}
+            {"offset", std::stoi(GetString("offset"))}
         };
     }
 
     Request request = RequestBuilder(GetApiUrl("getUpdates"), Method::POST)
                       .SetHeaders(GetDefaultHeader())
-                      .SetURLParams(params)
+                      .SetJSONParams(params)
                       .GetRequest();
     Response response = session.DoRequest(request);
 
