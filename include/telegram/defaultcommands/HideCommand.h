@@ -8,13 +8,11 @@
 class HideCommand : public telegram::Command
 {
     public:
-        HideCommand(telegram::TelegramBot *bot, std::string name,
-                    telegram::CommandSet *cs) : telegram::Command(bot, name, cs) { }
+        HideCommand(telegram::TelegramBot *bot, const std::string &name) : telegram::Command(bot, name) { }
 
-        virtual bool OnDirect(telegram::structures::Update &update)
+        bool OnDirect(const telegram::structures::Update &update) override
         {
-            telegram::request::SendMessageParams params(
-                        update.message->GetChatValue().GetIdValue(), "Hide the keyboard");
+            telegram::request::SendMessageParams params(update.GetMessage()->GetChatValue().GetIdValue(), "Hide the keyboard");
             telegram::request::ReplyMarkup replyMarkup;
             replyMarkup.SetReplyKeyboardHide({true});
             params.SetReplyMarkup(replyMarkup);

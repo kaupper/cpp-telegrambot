@@ -1,9 +1,10 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
-#include "jsonserializer/RequestConverter.h"
+#include "jsonserializer/Generated.h"
 
 #include "CommandException.h"
+
 
 namespace telegram
 {
@@ -25,55 +26,27 @@ namespace telegram
     };
 
     class TelegramBot;
-    class CommandSet;
     class Command
     {
         private:
             std::string name;
-            CommandSet *parent;
 
         protected:
             TelegramBot *bot;
 
-            bool HasParent()
-            {
-                return parent != nullptr;
-            }
-            const std::vector<Command *> &GetParentCommands() const;
-
         public:
-            Command(TelegramBot *bot, const std::string &name,
-                    CommandSet *parent = nullptr) : name(name), parent(parent), bot(bot) { }
-            virtual ~Command() { }
+            Command(TelegramBot *bot, const std::string &name);
+            virtual ~Command();
 
-            void SetName(const std::string &n)
-            {
-                name = n;
-            }
+            std::string GetName() const;
 
-            std::string GetName() const
-            {
-                return name;
-            }
+            bool operator()(const telegram::structures::Update &, CallReason, CallType);
 
-            bool operator()(telegram::structures::Update &, CallReason, CallType);
+            virtual void Setup();
 
-            virtual void Setup() { }
-
-            virtual bool OnDirect(telegram::structures::Update &)
-            {
-                throw CommandException("Method OnDirect is not implemented!");
-            }
-
-            virtual bool OnIndirect(telegram::structures::Update &)
-            {
-                throw CommandException("Method OnIndirect is not implemented!");
-            }
-
-            virtual bool OnQuit(telegram::structures::Update &)
-            {
-                throw CommandException("Method OnQuit is not implemented!");
-            }
+            virtual bool OnDirect(const telegram::structures::Update &);
+            virtual bool OnIndirect(const telegram::structures::Update &);
+            virtual bool OnQuit(const telegram::structures::Update &);
     };
 }
 

@@ -117,16 +117,16 @@ void TelegramBot::GetUpdates()
     for (auto &u : updates) {
         User user;
 
-        if (u.message != nullptr) {
-            user = u.message->GetFromValue();
-        } else if (u.editedMessage != nullptr) {
-            user = u.editedMessage->GetFromValue();
-        } else if (u.inlineQuery != nullptr) {
-            user = u.inlineQuery->GetFromValue();
-        } else if (u.chosenInlineResult != nullptr) {
-            user = u.chosenInlineResult->GetFromValue();
-        } else if (u.callbackQuery != nullptr) {
-            user = u.callbackQuery->GetFromValue();
+        if (u.HasMessage()) {
+            user = u.GetMessage()->GetFromValue();
+        } else if (u.HasEditedMessage()) {
+            user = u.GetEditedMessage()->GetFromValue();
+        } else if (u.HasInlineQuery()) {
+            user = u.GetInlineQuery()->GetFromValue();
+        } else if (u.HasChosenInlineResult()) {
+            user = u.GetChosenInlineResult()->GetFromValue();
+        } else if (u.HasCallbackQuery()) {
+            user = u.GetCallbackQuery()->GetFromValue();
         }
 
         std::string senderId = std::to_string(user.GetIdValue());

@@ -5,23 +5,27 @@ using namespace telegram;
 using namespace telegram::structures;
 
 
-CallReason CommandSet::GetReason(const Update &update) const
+static CallReason GetReason(const Update &update)
 {
     CallReason reason = CallReason::NOTHING;
 
-    if (update.message != nullptr) {
+    if (update.HasMessage()) {
         reason = CallReason::MESSAGE;
-    } else if (update.editedMessage != nullptr) {
+    } else if (update.HasEditedMessage()) {
         reason = CallReason::EDITED_MESSAGE;
-    } else if (update.inlineQuery != nullptr) {
+    } else if (update.HasInlineQuery()) {
         reason = CallReason::INLINE_QUERY;
-    } else if (update.inlineQuery != nullptr) {
+    } else if (update.HasChosenInlineResult()) {
         reason = CallReason::INLINE_RESULT;
-    } else if (update.inlineQuery != nullptr) {
+    } else if (update.HasCallbackQuery()) {
         reason = CallReason::CALLBACK_QUERY;
     }
 
     return reason;
+}
+
+CommandSet::CommandSet(TelegramBot *bot) : lastCommand(nullptr), bot(bot)
+{
 }
 
 CommandSet::~CommandSet()
@@ -31,7 +35,16 @@ CommandSet::~CommandSet()
     }
 }
 
-bool CommandSet::Process(Update &update)
+void CommandSet::Setup()
+{
+}
+
+void CommandSet::ResetLastCommand()
+{
+    lastCommand = nullptr;
+}
+
+bool CommandSet::Process(const Update &update)
 {
     CallReason reason = GetReason(update);
     std::string cmd = *(update.GetMessage()->GetText());

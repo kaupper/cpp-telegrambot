@@ -7,10 +7,9 @@
 class PingCommand : public telegram::Command
 {
     public:
-        PingCommand(telegram::TelegramBot *bot, std::string name,
-                    telegram::CommandSet *cs) : telegram::Command(bot, name, cs) { }
+        PingCommand(telegram::TelegramBot *bot, const std::string &name) : telegram::Command(bot, name) { }
 
-        virtual bool OnDirect(telegram::structures::Update &update)
+        bool OnDirect(const telegram::structures::Update &update) override
         {
             bot->SendMessage({update.GetMessageValue().GetChatValue().GetIdValue(), "pong"});
             return false;
