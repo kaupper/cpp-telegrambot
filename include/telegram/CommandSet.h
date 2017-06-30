@@ -19,6 +19,7 @@ namespace telegram
 
             template <typename T, typename = typename std::enable_if<std::is_base_of<Command, T>::value>::type>
             T & RegisterCommand(TelegramBot *bot, const std::string &name);
+            void RegisterCommand(TelegramBot *bot, const std::string &name, Command::FunctionType f);
 
         public:
             CommandSet(TelegramBot *bot);
@@ -34,7 +35,7 @@ namespace telegram
     template <typename T, typename = typename std::enable_if<std::is_base_of<Command, T>::value>::type>
     T & CommandSet::RegisterCommand(TelegramBot *bot, const std::string &name)
     {
-        commands.push_back(new T(bot, name, this));
+        commands.push_back(new T(bot, name));
         T *newCommand = (T *) commands.at(commands.size() - 1);
         newCommand->Setup();
         return (T &) * newCommand;

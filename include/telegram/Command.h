@@ -1,6 +1,9 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
+#include <functional>
+#include <string>
+
 #include "jsonserializer/Generated.h"
 
 #include "CommandException.h"
@@ -28,14 +31,19 @@ namespace telegram
     class TelegramBot;
     class Command
     {
+        public:
+            typedef std::function<void(TelegramBot *, const structures::Update &)> FunctionType;
+
         private:
             std::string name;
 
         protected:
             TelegramBot *bot;
+            FunctionType directFunction;
 
         public:
             Command(TelegramBot *bot, const std::string &name);
+            Command(TelegramBot *bot, const std::string &name, FunctionType);
             virtual ~Command();
 
             std::string GetName() const;

@@ -17,14 +17,14 @@
 #include "UpdateQueue.h"
 #include "CommandSet.h"
 #include "GeneralCallback.h"
-#include "JSONWrapper.h"
+#include "JSONPersister.h"
 #include "Util.h"
 #include "DataStore.h"
 
 
 namespace telegram
 {
-    class TelegramBot : public util::JSONWrapper, public util::DataStore
+    class TelegramBot : public util::JSONPersister, public util::DataStore
     {
         private:
             curlsession::CurlSession session;
@@ -62,6 +62,8 @@ namespace telegram
 
             template <typename T, typename = typename std::enable_if<std::is_base_of<Command, T>::value>::type>
             T & RegisterCommand(const std::string &name);
+
+            void RegisterCommand(const std::string &name, Command::FunctionType directFunction);
 
             template <typename T, typename = typename std::enable_if<std::is_base_of<GeneralCallback, T>::value>::type>
             T & RegisterGeneralCallback();

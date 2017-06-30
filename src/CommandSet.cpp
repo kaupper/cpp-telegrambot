@@ -44,6 +44,11 @@ void CommandSet::ResetLastCommand()
     lastCommand = nullptr;
 }
 
+void CommandSet::RegisterCommand(TelegramBot *bot, const std::string &name, Command::FunctionType f)
+{
+    commands.push_back(new Command(bot, name, f));
+}
+
 bool CommandSet::Process(const Update &update)
 {
     CallReason reason = GetReason(update);

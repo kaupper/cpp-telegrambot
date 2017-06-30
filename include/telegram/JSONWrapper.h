@@ -1,6 +1,9 @@
 #ifndef JSON_WRAPPER_H
 #define JSON_WRAPPER_H
 
+#include <mutex>
+#include <string>
+
 #include "jsonserializer/json.h"
 
 

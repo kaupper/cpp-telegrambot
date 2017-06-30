@@ -32,6 +32,7 @@ ${PROJECT_SOURCE_DIR}/src/TelegramBotMethods.cpp
 ${PROJECT_SOURCE_DIR}/src/UpdateQueue.cpp
 ${PROJECT_SOURCE_DIR}/src/Util.cpp
 ${PROJECT_SOURCE_DIR}/src/DataStore.cpp
+${PROJECT_SOURCE_DIR}/src/JSONPersister.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})

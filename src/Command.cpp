@@ -9,6 +9,11 @@ Command::Command(TelegramBot *bot, const std::string &name)
 {
 }
 
+Command::Command(TelegramBot *bot, const std::string &name, FunctionType f)
+    : name(name), bot(bot), directFunction(f)
+{
+}
+
 Command::~Command()
 {
 }
@@ -45,9 +50,14 @@ void Command::Setup()
 {
 }
 
-bool Command::OnDirect(const telegram::structures::Update &)
+bool Command::OnDirect(const telegram::structures::Update &update)
 {
-    throw CommandException("Method OnDirect is not implemented!");
+    if (not directFunction) {
+        throw CommandException("Method OnDirect is not implemented!");
+    }
+
+    directFunction(bot, update);
+    return false;
 }
 
 bool Command::OnIndirect(const telegram::structures::Update &)
